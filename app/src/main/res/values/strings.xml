@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">dndDMTools</string>
+    <string name="creature_name">Creature Name</string>
+    <string name="amount">Amount</string>
+    <string name="initiative">Initiative</string>
+    <string name="add">Add</string>
+    <string name="roll">Roll</string>
+    <string name="dexterity">Dexterity</string>
 </resources>
