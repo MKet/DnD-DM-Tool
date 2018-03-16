@@ -8,24 +8,24 @@
 
     <EditText
         android:id="@+id/creatureName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_width="192dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/creature_name"
         android:inputType="textPersonName"
         android:singleLine="true"
-        app:layout_constraintEnd_toStartOf="@+id/AmountInput"
+        app:layout_constraintEnd_toStartOf="@+id/ChallengeRatingInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/AmountInput"
-        android:layout_width="116dp"
+        android:layout_width="87dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/amount"
@@ -36,7 +36,7 @@
 
     <Button
         android:id="@+id/AddButton"
-        android:layout_width="355dp"
+        android:layout_width="191dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -44,9 +44,21 @@
         android:layout_marginTop="8dp"
         android:text="@string/add"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintEnd_toStartOf="@+id/ClearButton"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DexterityInput"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/ClearButton"
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/clear"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DexterityInput"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -55,7 +67,7 @@
         android:layout_width="92dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/dexterity"
         android:inputType="number"
@@ -66,25 +78,27 @@
     <EditText
         android:id="@+id/InitiativeInput"
         android:layout_width="92dp"
-        android:layout_height="wrap_content"
+        android:layout_height="51dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/initiative"
         android:inputType="number"
         android:singleLine="true"
+        app:layout_constraintBottom_toTopOf="@+id/AddButton"
         app:layout_constraintEnd_toStartOf="@+id/RollInput"
-        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/DexterityInput"
         app:layout_constraintTop_toBottomOf="@+id/creatureName" />
 
     <Button
         android:id="@+id/RollButton"
-        android:layout_width="68dp"
+        android:layout_width="71dp"
         android:layout_height="52dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/roll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AmountInput" />
@@ -114,5 +128,17 @@
         app:layout_constraintEnd_toStartOf="@+id/RollButton"
         app:layout_constraintTop_toBottomOf="@+id/AmountInput"
         app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/ChallengeRatingInput"
+        android:layout_width="57dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/challengeRatingAbbreviation"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/AmountInput"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
