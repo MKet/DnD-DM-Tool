@@ -10,15 +10,15 @@ import java.util.Map;
 
 public class CampaignPlayer {
     private String id;
-    private List<Ability> abilityList;
+    private List<Skill> skillList;
     private String name;
 
-    public List<Ability> getAbilityList() {
-        return abilityList;
+    public List<Skill> getSkillList() {
+        return skillList;
     }
 
-    public void setAbilityList(List<Ability> abilityList) {
-        this.abilityList = abilityList;
+    public void setSkillList(List<Skill> skillList) {
+        this.skillList = skillList;
     }
 
     public String getName() {

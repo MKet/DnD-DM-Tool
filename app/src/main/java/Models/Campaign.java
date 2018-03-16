@@ -12,9 +12,18 @@ public class Campaign {
     private String name;
     private List<CampaignPlayer> players;
     private String notes;
+    private String dungeonMaster;
 
     public String getId() {
         return id;
+    }
+
+    public String getDungeonMaster() {
+        return dungeonMaster;
+    }
+
+    public void setDungeonMaster(String dungeonMaster) {
+        this.dungeonMaster = dungeonMaster;
     }
 
     public void setId(String id) {
@@ -43,5 +52,10 @@ public class Campaign {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    @Override
+    public String toString(){
+        return name;
     }
 }

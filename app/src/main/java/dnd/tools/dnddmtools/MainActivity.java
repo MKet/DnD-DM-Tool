@@ -18,12 +18,14 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.database.FirebaseDatabase;
 
+import Models.DungeonMaster;
+
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,View.OnClickListener {
 
     private SignInButton signIn;
     private GoogleApiClient googleApiClient;
     private static final int RC_SIGN_IN = 9001;
-    public static String ACCOUNT = "";
+    public static String DUNGEON_MASTER = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
+            DungeonMaster dungeonMaster = new DungeonMaster(account);
             Intent intent = new Intent(this,HomeActivity.class);
-            intent.putExtra(ACCOUNT,account);
+            intent.putExtra(DUNGEON_MASTER,dungeonMaster);
             this.startActivity(intent);
         }
     }

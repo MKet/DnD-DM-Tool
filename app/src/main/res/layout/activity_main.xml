@@ -9,40 +9,6 @@
     >
 
 
-    <EditText
-        android:id="@+id/txtLoginName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="141dp"
-        android:background="#ffffff"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Username"
-        app:layout_constraintBottom_toTopOf="@+id/txtPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txtPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="36dp"
-        android:background="#ffffff"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLoginName" />
-
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
@@ -54,6 +20,5 @@
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+        app:layout_constraintStart_toStartOf="parent"/>
 </android.support.constraint.ConstraintLayout>
