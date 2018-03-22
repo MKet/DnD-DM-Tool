@@ -9,6 +9,9 @@ public class Skill {
     private int value;
     private Ability ability;
 
+    public Skill() {
+    }
+
     public Skill(String name, int value, Ability ability) {
         this.name = name;
         this.value = value;

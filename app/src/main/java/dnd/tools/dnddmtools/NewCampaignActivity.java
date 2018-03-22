@@ -70,12 +70,17 @@ public class NewCampaignActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         campaign = new Campaign();
         campaign.setPlayers(players);
+
         Intent intent = getIntent();
         DungeonMaster dungeonMaster = (DungeonMaster) intent.getParcelableExtra(HomeActivity.DUNGEONMASTER);
+
         campaign.setDungeonMaster(dungeonMaster.getId());
         campaign.setName(txtCampaignname.getText().toString());
+
         String key = reference.push().getKey();
-        reference.child("Campaign").child(key).setValue(campaign);
+        reference.child("Campaign").child(key).child("dungeonMaster").setValue(campaign.getDungeonMaster());
+        reference.child("Campaign").child(key).child("name").setValue(campaign.getName());
+        reference.child("Campaign").child(key).child("players").setValue(campaign.getPlayers());
         Intent intentBack = new Intent(this,HomeActivity.class);
         intent.putExtra(DUNGEON_MASTER,dungeonMaster);
         startActivity(intentBack);

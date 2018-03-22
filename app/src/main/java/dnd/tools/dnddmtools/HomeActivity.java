@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,6 +16,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +58,19 @@ public class HomeActivity extends AppCompatActivity{
             }
         });
         setSpinnerCampaign();
+
+        lstViewPlayers = (ListView) findViewById(R.id.lstPlayers);
+        spinnerCampaign.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setLstViewPlayers(spinnerCampaign.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void setSpinnerCampaign(){
@@ -65,33 +81,16 @@ public class HomeActivity extends AppCompatActivity{
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Campaign");
 
-        reference.addChildEventListener(new ChildEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Campaign campaign = new Campaign();
-                    campaign.setName((String)snapshot.child("name").getValue());
-                    campaign.setDungeonMaster((String)snapshot.child("dungeonMaster").getValue());
-                    campaign.setPlayers((List<CampaignPlayer>)snapshot.child("players").getValue());
+
+                    Campaign campaign = snapshot.getValue(Campaign.class);
                     campaigns.add(campaign);
                 }
                 campaignArrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -99,5 +98,18 @@ public class HomeActivity extends AppCompatActivity{
 
             }
         });
+    }
+
+    private void setLstViewPlayers(String name){
+        campaignPlayers = new ArrayList<>();
+        campaignPlayerArrayAdapter = new ArrayAdapter<CampaignPlayer>(this,android.R.layout.simple_list_item_1,campaignPlayers);
+        lstViewPlayers.setAdapter(campaignPlayerArrayAdapter);
+        for(Campaign c : campaigns){
+            if(c.getName().equals(name)){
+                campaignPlayers.addAll(c.getPlayers());
+            }
+        }
+        System.out.println(campaignPlayers.size());
+        campaignPlayerArrayAdapter.notifyDataSetChanged();
     }
 }
