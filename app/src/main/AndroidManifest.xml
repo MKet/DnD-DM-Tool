@@ -22,6 +22,9 @@
         <activity android:name=".NewCampaignActivity">
 
         </activity>
+        <activity android:name=".PlayerActivity">
+
+        </activity>
     </application>
 
 </manifest>
