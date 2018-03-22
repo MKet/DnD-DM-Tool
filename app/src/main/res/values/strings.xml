@@ -10,4 +10,12 @@
     <string name="clear">Clear</string>
     <string name="end_turn">End Turn</string>
     <string name="end_combat">End combat</string>
+    <string name="see_notes">See notes</string>
+    <string name="new_campaign">New Campaign</string>
+    <string name="login">Login</string>
+    <string name="players">Players</string>
+    <string name="playername">Playername</string>
+    <string name="add_player">Add player</string>
+    <string name="add_campaign">Add Campaign</string>
+    <string name="name">Name</string>
 </resources>
