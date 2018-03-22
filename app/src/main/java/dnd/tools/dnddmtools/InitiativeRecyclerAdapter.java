@@ -7,23 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 /**
  * Created by Marco on 3/22/2018.
  */
 public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private SortedList<CreatureTurnItem> Dataset;
-
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView mTextView;
-        public ViewHolder(TextView v) {
-            super(v);
-            mTextView = v;
-        }
-    }
 
     public InitiativeRecyclerAdapter() {
         Dataset = new SortedList<>(CreatureTurnItem.class, new SortedList.Callback<CreatureTurnItem>() {
@@ -82,7 +72,10 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         InitiativeViewHolder pageViewHolder = (InitiativeViewHolder) holder;
         CreatureTurnItem item = Dataset.get(position);
-        pageViewHolder.textView.setText(item.toString());
+        pageViewHolder.name.setText(String.format("name %s", item.getName()));
+        pageViewHolder.CR.setText(String.format(Locale.US,"CR %d", item.getCR()));
+        pageViewHolder.Initiative.setText(String.format(Locale.US,"Initiative %d", item.getInitiative()));
+        pageViewHolder.Dexterity.setText(String.format(Locale.US,"Dexterity %d", item.getDexterity()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -91,12 +84,22 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         return Dataset.size();
     }
 
-    class InitiativeViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
+    private class InitiativeViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        TextView CR;
+        TextView Initiative;
+        TextView Dexterity;
 
-        public InitiativeViewHolder(View itemView) {
+        InitiativeViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.text_view);
+            name = itemView.findViewById(R.id.name);
+
+            CR = itemView.findViewById(R.id.CR);
+
+            Initiative = itemView.findViewById(R.id.Initiative);
+
+            Dexterity = itemView.findViewById(R.id.Dexterity);
+
         }
     }
 }
