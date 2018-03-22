@@ -8,4 +8,6 @@
     <string name="dexterity">Dexterity</string>
     <string name="challengeRatingAbbreviation">CR</string>
     <string name="clear">Clear</string>
+    <string name="end_turn">End Turn</string>
+    <string name="end_combat">End combat</string>
 </resources>
