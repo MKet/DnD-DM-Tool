@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "485496121701",
+    "firebase_url": "https://dndduoapp.firebaseio.com",
+    "project_id": "dndduoapp",
+    "storage_bucket": "dndduoapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485496121701:android:baacb22c74848708",
+        "android_client_info": {
+          "package_name": "dnd.tools.dnddmtools"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485496121701-aemqdhnfdsa1um5gmdvrhvj83vj6i7uh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfAtHBEOdIbZVDIh1Y4R3pcSbJwFWj-eU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
