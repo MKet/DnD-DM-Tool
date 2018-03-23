@@ -9,11 +9,12 @@ import android.widget.EditText;
 
 import java.util.Random;
 
+import DndUtil.DndUtil;
+
+import static DndUtil.DndUtil.RollD20;
 import static DndUtil.DndUtil.RollToModifier;
 
 public class InitiativeActivity extends AppCompatActivity {
-
-    private Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +40,39 @@ public class InitiativeActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         add.setOnClickListener((v) -> {
+            if (creatureNameInput.getText().length() < 1)
+                return;
+            if (dexterityInput.getText().length() < 1)
+                return;
+
             String name = creatureNameInput.getText().toString();
             int cr  = Integer.parseInt(challengeRatingInput.getText().toString());
-            int amount = Integer.parseInt(amountInput.getText().toString());
+            int amount;
+            if (creatureNameInput.getText().length() < 1)
+                amount = 1;
+            else
+                amount = Integer.parseInt(amountInput.getText().toString());
             int dexterity = Integer.parseInt(dexterityInput.getText().toString());
-            int initiative = Integer.parseInt(initiativeInput.getText().toString());
-            int rollResult = Integer.parseInt((rollInput.getText().toString()));
+            int initiative;
+            if (initiativeInput.getText().length() < 1)
+                initiative = RollToModifier(dexterity);
+            else
+                initiative = Integer.parseInt(initiativeInput.getText().toString());
 
-            CreatureTurnItem item = new CreatureTurnItem(
-                                        name,
-                                        cr,
-                                        dexterity,
-                                rollResult + initiative);
-            adapter.add(item);
+            int rollResult;
+            if (roll.getText().length() < 1)
+                rollResult = RollD20();
+            else
+                rollResult = Integer.parseInt((rollInput.getText().toString()));
+
+            for(int i = 0; i < amount; i++) {
+                CreatureTurnItem item = new CreatureTurnItem(
+                        name,
+                        cr,
+                        dexterity,
+                        rollResult + initiative);
+                adapter.add(item);
+            }
         });
 
         clear.setOnClickListener((v) -> {
@@ -64,9 +85,9 @@ public class InitiativeActivity extends AppCompatActivity {
         });
 
         roll.setOnClickListener((v) -> {
-            int nextInt = random.nextInt(20)+1;
+            int rollResult = RollD20();
 
-            rollInput.setText(nextInt);
+            rollInput.setText(rollResult);
         });
 
         endTurn.setOnClickListener((v) -> adapter.nextTurn());
