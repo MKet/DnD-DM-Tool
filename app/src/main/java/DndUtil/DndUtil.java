@@ -19,5 +19,4 @@ public class DndUtil {
     public static int calculateProficiency(int level) {
         return (int)Math.floor((7 + level) / 4);
     }
-
 }

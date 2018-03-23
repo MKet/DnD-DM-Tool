@@ -2,6 +2,7 @@ package dnd.tools.dnddmtools;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,19 +49,16 @@ public class HomeActivity extends AppCompatActivity{
         setContentView(R.layout.activity_home);
 
         Intent intentGetAccount = getIntent();
-        dungeonMaster = (DungeonMaster) intentGetAccount.getParcelableExtra(MainActivity.DUNGEON_MASTER);
-        Button btnNewCampaign = (Button)findViewById(R.id.btnNewCampaign);
+        dungeonMaster = intentGetAccount.getParcelableExtra(MainActivity.DUNGEON_MASTER);
+        Button btnNewCampaign = findViewById(R.id.btnNewCampaign);
         final Intent intent = new Intent(this,NewCampaignActivity.class);
-        btnNewCampaign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.putExtra(DUNGEONMASTER,dungeonMaster);
-                startActivity(intent);
-            }
+        btnNewCampaign.setOnClickListener(v -> {
+            intent.putExtra(DUNGEONMASTER,dungeonMaster);
+            startActivity(intent);
         });
         setSpinnerCampaign();
 
-        lstViewPlayers = (ListView) findViewById(R.id.lstPlayers);
+        lstViewPlayers = findViewById(R.id.lstPlayers);
         spinnerCampaign.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -72,12 +70,20 @@ public class HomeActivity extends AppCompatActivity{
 
             }
         });
+
+        Button combatButton = findViewById(R.id.combatTracker);
+
+        combatButton.setOnClickListener((v) -> {
+            Intent combatIntent = new Intent(this, InitiativeActivity.class);
+            combatIntent.putParcelableArrayListExtra("campaignPlayers", (ArrayList<CampaignPlayer>) campaignPlayers);
+            startActivity(combatIntent);
+        });
     }
 
     private void setSpinnerCampaign(){
         campaigns = new ArrayList<>();
-        campaignArrayAdapter = new ArrayAdapter<Campaign>(this,android.R.layout.simple_list_item_1,campaigns);
-        spinnerCampaign = (Spinner)findViewById(R.id.spinner);
+        campaignArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,campaigns);
+        spinnerCampaign = findViewById(R.id.spinner);
         spinnerCampaign.setAdapter(campaignArrayAdapter);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Campaign");
@@ -103,16 +109,13 @@ public class HomeActivity extends AppCompatActivity{
 
     private void setLstViewPlayers(Campaign campaign){
         campaignPlayers = new ArrayList<>();
-        campaignPlayerArrayAdapter = new ArrayAdapter<CampaignPlayer>(this,android.R.layout.simple_list_item_1,campaignPlayers);
+        campaignPlayerArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,campaignPlayers);
         lstViewPlayers.setAdapter(campaignPlayerArrayAdapter);
 
         campaignPlayers.addAll(campaign.getPlayers());
         campaignPlayerArrayAdapter.notifyDataSetChanged();
-        lstViewPlayers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position]);
-            }
+        lstViewPlayers.setOnItemClickListener((parent, view, position, id) -> {
+            goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position]);
         });
 
     }

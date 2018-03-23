@@ -48,22 +48,22 @@ public class PlayerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         player = intent.getParcelableExtra(HomeActivity.CAMPAIGNPLAYER);
 
-        txtPlayerName = (TextView)findViewById(R.id.txtPlayername);
+        txtPlayerName = findViewById(R.id.txtPlayername);
         txtPlayerName.setText(player.getName());
 
-        editText1 = (EditText)findViewById(R.id.editText1);
-        editText2 = (EditText)findViewById(R.id.editText2);
-        editText3 = (EditText)findViewById(R.id.editText3);
-        editText4 = (EditText)findViewById(R.id.editText4);
-        editText5 = (EditText)findViewById(R.id.editText5);
+        editText1 = findViewById(R.id.editText1);
+        editText2 = findViewById(R.id.editText2);
+        editText3 = findViewById(R.id.editText3);
+        editText4 = findViewById(R.id.editText4);
+        editText5 = findViewById(R.id.editText5);
 
-        txt1 = (TextView)findViewById(R.id.textView1);
-        txt2 = (TextView)findViewById(R.id.textView2);
-        txt3 = (TextView)findViewById(R.id.textView3);
-        txt4 = (TextView)findViewById(R.id.textView4);
-        txt5 = (TextView)findViewById(R.id.textView5);
+        txt1 = findViewById(R.id.textView1);
+        txt2 = findViewById(R.id.textView2);
+        txt3 = findViewById(R.id.textView3);
+        txt4 = findViewById(R.id.textView4);
+        txt5 = findViewById(R.id.textView5);
 
-        spinnerAbility = (Spinner) findViewById(R.id.spinnerAbility);
+        spinnerAbility = findViewById(R.id.spinnerAbility);
 
         ArrayAdapter<Ability> adapter = new ArrayAdapter<Ability>(this,android.R.layout.simple_list_item_1,Ability.values());
         adapter.notifyDataSetChanged();
@@ -82,18 +82,18 @@ public class PlayerActivity extends AppCompatActivity {
         });
     }
 
-    private void changeLayout(Enum ability){
-        switch (ability.name()){
-            case "Strength" : layoutAbilityStrength(); break;
-            case "Dexterity" : layoutAbilityDexterity(); break;
-            case "Intelligence" : layoutAbilityIntelligence(); break;
-            case "Wisdom" : layoutAbilityWisdom(); break;
-            case "Charisma" : layoutAbilityCharisma(); break;
+    private void changeLayout(Ability ability){
+        switch (ability){
+            case Strength: layoutAbilityStrength(); break;
+            case Dexterity: layoutAbilityDexterity(); break;
+            case Intelligence: layoutAbilityIntelligence(); break;
+            case Wisdom: layoutAbilityWisdom(); break;
+            case Charisma: layoutAbilityCharisma(); break;
         }
     }
 
     private void layoutAbilityStrength(){
-        txt1.setText("Athleticts");
+        txt1.setText("Athletics");
 
         for(Skill s : player.getSkillList()){
             if(s.getName().equals("Strength")){

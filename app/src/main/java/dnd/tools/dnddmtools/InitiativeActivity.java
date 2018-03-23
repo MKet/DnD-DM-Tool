@@ -83,12 +83,7 @@ public class InitiativeActivity extends AppCompatActivity {
         });
 
         clear.setOnClickListener((v) -> {
-            creatureNameInput.getText().clear();
-            challengeRatingInput.getText().clear();
-            amountInput.getText().clear();
-            dexterityInput.getText().clear();
-            initiativeInput.getText().clear();
-            rollInput.getText().clear();
+
         });
 
         roll.setOnClickListener((v) -> {
