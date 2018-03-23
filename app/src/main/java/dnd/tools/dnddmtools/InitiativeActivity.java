@@ -6,10 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.EditText;
-
-import java.util.Random;
-
-import DndUtil.DndUtil;
+import android.widget.Toast;
 
 import static DndUtil.DndUtil.RollD20;
 import static DndUtil.DndUtil.RollToModifier;
@@ -40,27 +37,37 @@ public class InitiativeActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         add.setOnClickListener((v) -> {
-            if (creatureNameInput.getText().length() < 1)
+            if (creatureNameInput.getText().toString().trim().length() == 0) {
+                Toast.makeText(this, getString(R.string.name_not_filled), Toast.LENGTH_LONG).show();
                 return;
-            if (dexterityInput.getText().length() < 1)
+            }
+            if (dexterityInput.getText().toString().trim().length() == 0) {
+                Toast.makeText(this, getString(R.string.dexterity_not_filled), Toast.LENGTH_LONG).show();
                 return;
+            }
+            if (challengeRatingInput.getText().toString().trim().length() == 0) {
+                Toast.makeText(this, getString(R.string.CR_not_filled), Toast.LENGTH_LONG).show();
+                return;
+            }
 
             String name = creatureNameInput.getText().toString();
+            int dexterity = Integer.parseInt(dexterityInput.getText().toString());
             int cr  = Integer.parseInt(challengeRatingInput.getText().toString());
+
             int amount;
-            if (creatureNameInput.getText().length() < 1)
+            if (amountInput.getText().toString().trim().length() == 0)
                 amount = 1;
             else
                 amount = Integer.parseInt(amountInput.getText().toString());
-            int dexterity = Integer.parseInt(dexterityInput.getText().toString());
+
             int initiative;
-            if (initiativeInput.getText().length() < 1)
+            if (initiativeInput.getText().toString().trim().length() == 0)
                 initiative = RollToModifier(dexterity);
             else
                 initiative = Integer.parseInt(initiativeInput.getText().toString());
 
             int rollResult;
-            if (roll.getText().length() < 1)
+            if (rollInput.getText().toString().trim().length() == 0)
                 rollResult = RollD20();
             else
                 rollResult = Integer.parseInt((rollInput.getText().toString()));

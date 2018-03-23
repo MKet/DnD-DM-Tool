@@ -19,4 +19,7 @@
     <string name="add_campaign">Add Campaign</string>
     <string name="name">Name</string>
     <string name="dash">-</string>
+    <string name="name_not_filled">Creature name must be filled in</string>
+    <string name="dexterity_not_filled">Dexterity not filled in</string>
+    <string name="CR_not_filled">Challenge rating not filled in</string>
 </resources>
