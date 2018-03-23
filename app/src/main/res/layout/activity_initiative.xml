@@ -162,8 +162,6 @@
         app:layout_constraintStart_toEndOf="@+id/EndTurnButton"
         app:layout_constraintTop_toBottomOf="@+id/recycler" />
 
-    <TextView />
-
     <TableRow
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="352dp"
