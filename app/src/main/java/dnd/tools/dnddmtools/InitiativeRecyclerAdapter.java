@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 /**
  * Created by Marco on 3/22/2018.
  */
@@ -52,10 +54,10 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         InitiativeViewHolder initiativeViewHolder = (InitiativeViewHolder) holder;
         CreatureTurnItem item = Dataset.get(position);
-        initiativeViewHolder.CR.setText(item.getCR());
-        initiativeViewHolder.Initiative.setText(item.getInitiative());
+        initiativeViewHolder.CR.setText(String.format(Locale.US,"%d", item.getCR()));
+        initiativeViewHolder.Initiative.setText(String.format(Locale.US,"%d", item.getInitiative()));
         initiativeViewHolder.name.setText(item.getName());
-        initiativeViewHolder.Dexterity.setText(item.getDexterity());
+        initiativeViewHolder.Dexterity.setText(String.format(Locale.US,"%d", item.getDexterity()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
