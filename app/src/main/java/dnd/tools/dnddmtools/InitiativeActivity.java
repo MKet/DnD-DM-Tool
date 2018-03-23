@@ -29,6 +29,8 @@ public class InitiativeActivity extends AppCompatActivity {
         Button clear = findViewById(R.id.ClearButton);
         Button roll = findViewById(R.id.RollButton);
         Button add = findViewById(R.id.AddButton);
+        Button endTurn = findViewById(R.id.EndTurnButton);
+        Button endCombat = findViewById(R.id.EndCombat);
         RecyclerView recyclerView = findViewById(R.id.recycler);
 
         InitiativeRecyclerAdapter adapter = new InitiativeRecyclerAdapter();

@@ -18,4 +18,5 @@
     <string name="add_player">Add player</string>
     <string name="add_campaign">Add Campaign</string>
     <string name="name">Name</string>
+    <string name="dash">-</string>
 </resources>

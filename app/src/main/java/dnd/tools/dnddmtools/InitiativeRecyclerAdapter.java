@@ -50,12 +50,12 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        InitiativeViewHolder pageViewHolder = (InitiativeViewHolder) holder;
+        InitiativeViewHolder initiativeViewHolder = (InitiativeViewHolder) holder;
         CreatureTurnItem item = Dataset.get(position);
-        pageViewHolder.name.setText(String.format("name %s", item.getName()));
-        pageViewHolder.CR.setText(String.format(Locale.US,"CR %d", item.getCR()));
-        pageViewHolder.Initiative.setText(String.format(Locale.US,"Initiative %d", item.getInitiative()));
-        pageViewHolder.Dexterity.setText(String.format(Locale.US,"Dexterity %d", item.getDexterity()));
+        initiativeViewHolder.CR.setText(item.getCR());
+        initiativeViewHolder.Initiative.setText(item.getInitiative());
+        initiativeViewHolder.name.setText(item.getName());
+        initiativeViewHolder.Dexterity.setText(item.getDexterity());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

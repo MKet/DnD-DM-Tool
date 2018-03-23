@@ -133,12 +133,12 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="368dp"
-        android:layout_height="242dp"
+        android:layout_height="216dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="220dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -161,5 +161,53 @@
         android:text="@string/end_combat"
         app:layout_constraintStart_toEndOf="@+id/EndTurnButton"
         app:layout_constraintTop_toBottomOf="@+id/recycler" />
+
+    <TextView />
+
+    <TableRow
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="352dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/creature_name"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:id="@+id/CR"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/challengeRatingAbbreviation"
+            android:layout_marginEnd="20dp"/>
+
+
+        <TextView
+            android:id="@+id/Initiative"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/initiative"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:id="@+id/Dexterity"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="@string/dexterity"/>
+    </TableRow>
 
 </android.support.constraint.ConstraintLayout>
