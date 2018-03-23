@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity{
     private List<CampaignPlayer> campaignPlayers;
     private List<Campaign> campaigns;
     private DungeonMaster dungeonMaster;
+    public static final String CAMPAIGNPLAYER = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class HomeActivity extends AppCompatActivity{
         spinnerCampaign.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setLstViewPlayers(spinnerCampaign.getSelectedItem().toString());
+                setLstViewPlayers((Campaign) campaigns.toArray()[position]);
             }
 
             @Override
@@ -100,16 +101,25 @@ public class HomeActivity extends AppCompatActivity{
         });
     }
 
-    private void setLstViewPlayers(String name){
+    private void setLstViewPlayers(Campaign campaign){
         campaignPlayers = new ArrayList<>();
         campaignPlayerArrayAdapter = new ArrayAdapter<CampaignPlayer>(this,android.R.layout.simple_list_item_1,campaignPlayers);
         lstViewPlayers.setAdapter(campaignPlayerArrayAdapter);
-        for(Campaign c : campaigns){
-            if(c.getName().equals(name)){
-                campaignPlayers.addAll(c.getPlayers());
-            }
-        }
-        System.out.println(campaignPlayers.size());
+
+        campaignPlayers.addAll(campaign.getPlayers());
         campaignPlayerArrayAdapter.notifyDataSetChanged();
+        lstViewPlayers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position]);
+            }
+        });
+
+    }
+
+    private void goToPlayerStats(CampaignPlayer player){
+        Intent intent = new Intent(this,PlayerActivity.class);
+        intent.putExtra(CAMPAIGNPLAYER,player);
+        startActivity(intent);
     }
 }
