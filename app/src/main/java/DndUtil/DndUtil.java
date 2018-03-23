@@ -16,4 +16,8 @@ public class DndUtil {
         return random.nextInt(20)+1;
     }
 
+    public static int calculateProficiency(int level) {
+        return (int)Math.floor((7 + level) / 4);
+    }
+
 }
