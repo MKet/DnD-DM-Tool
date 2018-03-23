@@ -50,6 +50,10 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
         return turns;
     }
 
+    public void endTurn() {
+        turns++;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,15 +61,20 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
 
         CreatureTurnItem that = (CreatureTurnItem) o;
 
-        return CR == that.CR && Dexterity == that.Dexterity && Initiative == that.Initiative && name.equals(that.name);
+        return CR == that.CR &&
+               Dexterity == that.Dexterity &&
+               Initiative == that.Initiative &&
+               turns == that.turns &&
+               (name != null ? name.equals(that.name) : that.name == null);
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + CR;
         result = 31 * result + Dexterity;
         result = 31 * result + Initiative;
+        result = 31 * result + turns;
         return result;
     }
 
@@ -76,16 +85,20 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
                 ", CR=" + CR +
                 ", Dexterity=" + Dexterity +
                 ", Initiative=" + Initiative +
+                ", turns=" + turns +
                 '}';
     }
 
     @Override
     public int compareTo(@NonNull CreatureTurnItem creatureTurnItem) {
-        int comparison = creatureTurnItem.turns - turns;
+        if (this == creatureTurnItem)
+            return 0;
+
+        int comparison = turns - creatureTurnItem.turns;
         if (comparison == 0)
-            comparison = Initiative - creatureTurnItem.Initiative;
+            comparison = creatureTurnItem.Initiative - Initiative;
         if (comparison == 0)
-            comparison = Dexterity - creatureTurnItem.Dexterity;
+            comparison = creatureTurnItem.Dexterity - Dexterity;
 
         return comparison;
 

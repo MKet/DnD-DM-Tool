@@ -62,12 +62,13 @@ public class InitiativeActivity extends AppCompatActivity {
         });
 
         roll.setOnClickListener((v) -> {
-            random = new Random();
-
             int nextInt = random.nextInt(20)+1;
 
-            rollInput.getText().clear();
-            rollInput.getText().append(String.valueOf(nextInt));
+            rollInput.setText(nextInt);
         });
+
+        endTurn.setOnClickListener((v) -> adapter.nextTurn());
+
+        endCombat.setOnClickListener((v) -> adapter.clear());
     }
 }

@@ -2,12 +2,11 @@ package dnd.tools.dnddmtools;
 
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.Locale;
 
 /**
  * Created by Marco on 3/22/2018.
@@ -65,22 +64,28 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         return Dataset.size();
     }
 
+    public void clear() {
+        Dataset.clear();
+    }
+
+    public void nextTurn() {
+        CreatureTurnItem creatureTurnItem = Dataset.get(0);
+        creatureTurnItem.endTurn();
+        Dataset.recalculatePositionOfItemAt(0);
+    }
+
     private class InitiativeViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        TextView CR;
-        TextView Initiative;
-        TextView Dexterity;
+        private TextView name;
+        private TextView CR;
+        private TextView Initiative;
+        private TextView Dexterity;
 
         InitiativeViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
-
             CR = itemView.findViewById(R.id.CR);
-
             Initiative = itemView.findViewById(R.id.Initiative);
-
             Dexterity = itemView.findViewById(R.id.Dexterity);
-
         }
     }
 }
