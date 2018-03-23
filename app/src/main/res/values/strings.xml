@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">dndDMTools</string>
+    <string name="creature_name">Creature Name</string>
+    <string name="amount">Amount</string>
+    <string name="initiative">Initiative mod</string>
+    <string name="add">Add</string>
+    <string name="roll">Roll</string>
+    <string name="dexterity">Dexterity</string>
+    <string name="challengeRatingAbbreviation">CR</string>
+    <string name="clear">Clear</string>
+    <string name="end_turn">End Turn</string>
+    <string name="end_combat">End combat</string>
+    <string name="see_notes">See notes</string>
+    <string name="new_campaign">New Campaign</string>
+    <string name="login">Login</string>
+    <string name="players">Players</string>
+    <string name="playername">Playername</string>
+    <string name="add_player">Add player</string>
+    <string name="add_campaign">Add Campaign</string>
+    <string name="name">Name</string>
+    <string name="dash">-</string>
+    <string name="name_not_filled">Creature name must be filled in</string>
+    <string name="dexterity_not_filled">Dexterity not filled in</string>
+    <string name="CR_not_filled">Challenge rating not filled in</string>
 </resources>
