@@ -16,7 +16,8 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     private SortedList<CreatureTurnItem> Dataset;
 
     public InitiativeRecyclerAdapter() {
-        Dataset = new SortedList<>(CreatureTurnItem.class, new SortedList.Callback<CreatureTurnItem>() {
+
+        Dataset = new SortedList<>(CreatureTurnItem.class, new SortedListAdapterCallback<CreatureTurnItem>(this) {
             @Override
             public int compare(CreatureTurnItem o1, CreatureTurnItem o2) {
                 return o1.compareTo(o2);
@@ -30,26 +31,6 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             @Override
             public boolean areItemsTheSame(CreatureTurnItem item1, CreatureTurnItem item2) {
                 return item1 == item2;
-            }
-
-            @Override
-            public void onInserted(int position, int count) {
-                notifyItemRangeInserted(position, count);
-            }
-
-            @Override
-            public void onRemoved(int position, int count) {
-                notifyItemRangeRemoved(position, count);
-            }
-
-            @Override
-            public void onMoved(int fromPosition, int toPosition) {
-                notifyItemMoved(fromPosition, toPosition);
-            }
-
-            @Override
-            public void onChanged(int position, int count) {
-                notifyItemRangeChanged(position, count);
             }
         });
     }
