@@ -122,6 +122,7 @@ public class NewCampaignActivity extends AppCompatActivity {
         player.setId(id);
         players.add(player);
         adapter.notifyDataSetChanged();
+        txtPlayername.setText("");
     }
 
     private void setListView(){

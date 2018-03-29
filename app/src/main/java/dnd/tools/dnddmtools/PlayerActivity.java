@@ -8,12 +8,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,6 +45,7 @@ public class PlayerActivity extends AppCompatActivity {
     private CampaignPlayer player;
     private Campaign campaign;
     private List<Skill> skills;
+    private int position;
 
     private TextView txtPlayerName;
     private Spinner spinnerAbility;
@@ -96,7 +99,7 @@ public class PlayerActivity extends AppCompatActivity {
                         try {
                             skill.setValue(Integer.valueOf(editText1.getText().toString()));
                         } catch (NumberFormatException e) {
-                            e.printStackTrace();
+                            Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -116,7 +119,13 @@ public class PlayerActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 for(Skill skill :skills){
-                    if(skill.getName().equals(Integer.valueOf(editText2.getText().toString())));
+                    try {
+                        if(skill.getName().equals(Integer.valueOf(editText2.getText().toString()))){
+                            skill.setValue(Integer.valueOf(editText2.getText().toString()));
+                        }
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -134,7 +143,13 @@ public class PlayerActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 for(Skill skill : skills){
-                    if(skill.getName().equals(Integer.valueOf(editText3.getText().toString())));
+                    try {
+                        if(skill.getName().equals(Integer.valueOf(editText3.getText().toString()))){
+                            skill.setValue(Integer.valueOf(editText3.getText().toString()));
+                        }
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -153,7 +168,11 @@ public class PlayerActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 for(Skill skill : skills){
                     if(skill.getName().equals(txt4.getText())){
-                        skill.setValue(Integer.valueOf(editText4.getText().toString()));
+                        try {
+                            skill.setValue(Integer.valueOf(editText4.getText().toString()));
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -173,7 +192,11 @@ public class PlayerActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 for(Skill skill : skills){
                     if(skill.getName().equals(editText5.getText())){
-                        skill.setValue(Integer.valueOf(txt5.getText().toString()));
+                        try {
+                            skill.setValue(Integer.valueOf(txt5.getText().toString()));
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -191,6 +214,7 @@ public class PlayerActivity extends AppCompatActivity {
         player = intent.getParcelableExtra(HomeActivity.CAMPAIGNPLAYER);
         campaign = intent.getParcelableExtra(HomeActivity.CAMPAIGN);
         skills = (List<Skill>) intent.getSerializableExtra(HomeActivity.SKILLSLIST);
+        position = intent.getIntExtra(HomeActivity.POSITION,-1);
         player.setSkillList(skills);
 
         txtPlayerName.setText(player.getName());
@@ -358,7 +382,7 @@ public class PlayerActivity extends AppCompatActivity {
 
     private void layoutAbilityCharisma(){
         for(Skill s : player.getSkillList()){
-            if(s.getAbility().equals("Charisma")){
+            if(s.getAbility().toString().equals("Charisma")){
                 if(s.getName().equals("Deception")){
                     txt1.setText(s.getName());
                     editText1.setText(Integer.toString(s.getValue()));
@@ -387,9 +411,15 @@ public class PlayerActivity extends AppCompatActivity {
 
     private void savePlayer(){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference reference = firebaseDatabase.getReference("Campaign").child(campaign.getId()).child("players").child(player.getId()).child("skillList");
+        System.out.println(player.getId());
+        DatabaseReference reference = firebaseDatabase.getReference("Campaign").child(campaign.getId()).child("players").child(String.valueOf(position));
         reference.removeValue();
-        reference.setValue(skills);
+        reference.setValue(player);
+
+        for(Skill s : player.getSkillList()){
+            System.out.println(s);
+        }
+
     }
 
 }

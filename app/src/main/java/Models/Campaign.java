@@ -15,7 +15,7 @@ public class Campaign implements Parcelable{
     private String id;
     private String name;
     private List<CampaignPlayer> players;
-    private String notes;
+    private String note;
     private String dungeonMaster;
 
     public Campaign(){
@@ -26,7 +26,7 @@ public class Campaign implements Parcelable{
         id = in.readString();
         name = in.readString();
         players = in.createTypedArrayList(CampaignPlayer.CREATOR);
-        notes = in.readString();
+        note = in.readString();
         dungeonMaster = in.readString();
     }
 
@@ -74,12 +74,12 @@ public class Campaign implements Parcelable{
         this.players = players;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getNote() {
+        return note;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override
@@ -97,7 +97,7 @@ public class Campaign implements Parcelable{
         dest.writeString(id);
         dest.writeString(name);
         dest.writeTypedList(players);
-        dest.writeString(notes);
+        dest.writeString(note);
         dest.writeString(dungeonMaster);
     }
 }
