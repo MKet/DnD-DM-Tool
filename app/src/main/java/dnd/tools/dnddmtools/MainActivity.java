@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import Models.DungeonMaster;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private SignInButton signIn;
     private GoogleApiClient googleApiClient;
@@ -32,16 +32,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,signInOptions).build();
+         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, (v) -> {
+             Toast.makeText(this, getString(R.string.login_failed), Toast.LENGTH_LONG).show();
+         }).addApi(Auth.GOOGLE_SIGN_IN_API,signInOptions).build();
         signIn = findViewById(R.id.btnLogin);
-        signIn.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-        this.startActivityForResult(intent,RC_SIGN_IN);
+        signIn.setOnClickListener((v) -> {
+            Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+            this.startActivityForResult(intent,RC_SIGN_IN);
+        });
     }
 
     @Override
@@ -63,11 +61,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             Intent intent = new Intent(this,HomeActivity.class);
             intent.putExtra(DUNGEON_MASTER,dungeonMaster);
             this.startActivity(intent);
+        } else {
+            Toast.makeText(this, getString(R.string.login_failed), Toast.LENGTH_LONG).show();
         }
-    }
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     @Override

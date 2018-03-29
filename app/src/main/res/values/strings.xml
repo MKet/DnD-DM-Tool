@@ -23,4 +23,7 @@
     <string name="dexterity_not_filled">Dexterity not filled in</string>
     <string name="CR_not_filled">Challenge rating not filled in</string>
     <string name="combat">Combat</string>
+    <string name="exp_result">Experience result</string>
+    <string name="experience_message">This combat got each player %d experience</string>
+    <string name="login_failed">Login failed</string>
 </resources>
