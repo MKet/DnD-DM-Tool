@@ -26,6 +26,7 @@ import java.util.List;
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.DungeonMaster;
+import Models.Skill;
 
 /**
  * Created by maxhe on 15-3-2018.
@@ -41,7 +42,10 @@ public class HomeActivity extends AppCompatActivity{
     private List<CampaignPlayer> campaignPlayers;
     private List<Campaign> campaigns;
     private DungeonMaster dungeonMaster;
+    public static final String CAMPAIGN = "Campaign";
     public static final String CAMPAIGNPLAYER = "";
+    public static final String SKILLSLIST = "LIST";
+    private Campaign campaign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +99,9 @@ public class HomeActivity extends AppCompatActivity{
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
                     Campaign campaign = snapshot.getValue(Campaign.class);
+                    String id = snapshot.getKey();
+                    System.out.println(id);
+                    campaign.setId(id);
                     campaigns.add(campaign);
                 }
                 campaignArrayAdapter.notifyDataSetChanged();
@@ -108,6 +115,7 @@ public class HomeActivity extends AppCompatActivity{
     }
 
     private void setLstViewPlayers(Campaign campaign){
+        this.campaign = campaign;
         campaignPlayers = new ArrayList<>();
         campaignPlayerArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,campaignPlayers);
         lstViewPlayers.setAdapter(campaignPlayerArrayAdapter);
@@ -123,6 +131,11 @@ public class HomeActivity extends AppCompatActivity{
     private void goToPlayerStats(CampaignPlayer player){
         Intent intent = new Intent(this,PlayerActivity.class);
         intent.putExtra(CAMPAIGNPLAYER,player);
+        intent.putExtra(CAMPAIGN, campaign);
+        intent.putExtra(SKILLSLIST,(ArrayList<Skill>) player.getSkillList());
+
+
+
         startActivity(intent);
     }
 }

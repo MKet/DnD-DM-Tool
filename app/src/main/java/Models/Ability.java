@@ -1,5 +1,6 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by maxhe on 16-3-2018.
  */
 
-public enum Ability {
+public enum Ability implements Serializable{
 
     Strength("Strength"),
     Dexterity("Dexterity"),

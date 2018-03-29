@@ -36,6 +36,7 @@ public class NewCampaignActivity extends AppCompatActivity {
     private EditText txtCampaignname;
     private ArrayAdapter<CampaignPlayer> adapter;
     private String DUNGEON_MASTER = "";
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -67,7 +68,6 @@ public class NewCampaignActivity extends AppCompatActivity {
     }
 
     private void addCampaign(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         campaign = new Campaign();
         campaign.setPlayers(players);
 
@@ -118,6 +118,8 @@ public class NewCampaignActivity extends AppCompatActivity {
 
 
         player.setSkillList(skills);
+        String id = reference.push().getKey();
+        player.setId(id);
         players.add(player);
         adapter.notifyDataSetChanged();
     }
