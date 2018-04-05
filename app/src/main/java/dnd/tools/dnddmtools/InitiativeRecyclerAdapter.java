@@ -1,11 +1,15 @@
 package dnd.tools.dnddmtools;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,8 +25,10 @@ import Models.CreatureTurnItem;
  */
 public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private SortedList<CreatureTurnItem> Dataset;
+    private Context context;
 
-    public InitiativeRecyclerAdapter() {
+    public InitiativeRecyclerAdapter(Context context) {
+        this.context = context;
 
         Dataset = new SortedList<>(CreatureTurnItem.class, new SortedListAdapterCallback<CreatureTurnItem>(this) {
             @Override
@@ -75,6 +81,9 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         initiativeViewHolder.Initiative.setText(String.format(Locale.US,"%d", item.getInitiative()));
         initiativeViewHolder.name.setText(item.getName());
         initiativeViewHolder.Dexterity.setText(String.format(Locale.US,"%d", item.getDexterity()));
+
+        if (item.isFriendly())
+            initiativeViewHolder.row.setBackgroundColor(context.getResources().getColor(R.color.friendlyInitative));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -98,6 +107,7 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         private TextView CR;
         private TextView Initiative;
         private TextView Dexterity;
+        private TableRow row;
 
         InitiativeViewHolder(View itemView) {
             super(itemView);
@@ -105,6 +115,8 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             CR = itemView.findViewById(R.id.CR);
             Initiative = itemView.findViewById(R.id.Initiative);
             Dexterity = itemView.findViewById(R.id.Dexterity);
+            row = itemView.findViewById(R.id.row);
+
         }
     }
 }

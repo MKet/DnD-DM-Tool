@@ -16,15 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InitiativeActivity"></activity>
-        <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".NewCampaignActivity"></activity>
+        <activity android:name=".InitiativeActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".NewCampaignActivity" />
         <activity android:name=".PlayerActivity">
             android:windowSoftInputMode="stateUnchanged|adjustResize"
         </activity>
-        <activity android:name=".NoteActivity">
-
-        </activity>
+        <activity android:name=".NoteActivity"></activity>
     </application>
 
 </manifest>

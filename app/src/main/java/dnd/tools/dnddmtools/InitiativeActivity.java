@@ -55,7 +55,7 @@ public class InitiativeActivity extends AppCompatActivity {
             Button endCombat = findViewById(R.id.EndCombat);
             RecyclerView recyclerView = findViewById(R.id.recycler);
 
-            InitiativeRecyclerAdapter adapter = new InitiativeRecyclerAdapter();
+            InitiativeRecyclerAdapter adapter = new InitiativeRecyclerAdapter(this);
             LinearLayoutManager LinearLayoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(LinearLayoutManager);
             recyclerView.setAdapter(adapter);
@@ -130,12 +130,6 @@ public class InitiativeActivity extends AppCompatActivity {
                 int experience = calculateExperience(adapter.getList(), players.size());
 
                 Toast.makeText(this, getString(R.string.experience_message, experience), Toast.LENGTH_LONG).show();
-
-                finish();
-
-                /*ExperienceFragment newFragment = ExperienceFragment.newInstance(experience);
-                newFragment.getDialog().setOnDismissListener((di) -> finish());
-                newFragment.show(getSupportFragmentManager(), "dialog");*/
             });
         }
     }
