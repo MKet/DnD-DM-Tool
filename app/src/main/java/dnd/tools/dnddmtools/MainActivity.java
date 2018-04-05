@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         signIn = findViewById(R.id.btnLogin);
         signIn.setOnClickListener((v) -> {
             Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-            this.startActivityForResult(intent,RC_SIGN_IN);
+            startActivityForResult(intent,RC_SIGN_IN);
         });
     }
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleSignInResult(GoogleSignInResult result){
-        Log.d("TAG","handleSignInResult: " + result);
+        Log.d("TAG","handleSignInResult: " + result + " status: " + result.getStatus());
 
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
