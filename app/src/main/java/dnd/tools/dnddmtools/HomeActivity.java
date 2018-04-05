@@ -34,7 +34,9 @@ import Models.Skill;
 
 public class HomeActivity extends AppCompatActivity{
 
-    public static String DUNGEONMASTER = "";
+    public static final String DUNGEONMASTER = "";
+    public static final String POSITION = "Position";
+    public static final String NOTES = "Note";
     private ListView lstViewPlayers;
     private Spinner spinnerCampaign;
     private ArrayAdapter<CampaignPlayer> campaignPlayerArrayAdapter;
@@ -62,6 +64,13 @@ public class HomeActivity extends AppCompatActivity{
         });
         setSpinnerCampaign();
 
+        Button btnNotes = findViewById(R.id.btnSeeNotes);
+        Intent intentNotes = new Intent(this,NoteActivity.class);
+        btnNotes.setOnClickListener(v -> {
+            intentNotes.putExtra(NOTES,campaign);
+            startActivity(intentNotes);
+        });
+
         lstViewPlayers = findViewById(R.id.lstPlayers);
         spinnerCampaign.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -70,9 +79,7 @@ public class HomeActivity extends AppCompatActivity{
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         Button combatButton = findViewById(R.id.combatTracker);
@@ -100,7 +107,6 @@ public class HomeActivity extends AppCompatActivity{
 
                     Campaign campaign = snapshot.getValue(Campaign.class);
                     String id = snapshot.getKey();
-                    System.out.println(id);
                     campaign.setId(id);
                     campaigns.add(campaign);
                 }
@@ -123,17 +129,17 @@ public class HomeActivity extends AppCompatActivity{
         campaignPlayers.addAll(campaign.getPlayers());
         campaignPlayerArrayAdapter.notifyDataSetChanged();
         lstViewPlayers.setOnItemClickListener((parent, view, position, id) -> {
-            goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position]);
+            goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position],position);
         });
 
     }
 
-    private void goToPlayerStats(CampaignPlayer player){
+    private void goToPlayerStats(CampaignPlayer player, int position){
         Intent intent = new Intent(this,PlayerActivity.class);
         intent.putExtra(CAMPAIGNPLAYER,player);
         intent.putExtra(CAMPAIGN, campaign);
         intent.putExtra(SKILLSLIST,(ArrayList<Skill>) player.getSkillList());
-
+        intent.putExtra(POSITION,position);
 
 
         startActivity(intent);

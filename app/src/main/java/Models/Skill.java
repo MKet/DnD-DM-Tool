@@ -40,6 +40,11 @@ public class Skill implements Serializable {
     public void setValue(int value) {
         this.value = value;
     }
+
+    @Override
+    public String toString(){
+        return name + " : " + value;
+    }
 }
 
 

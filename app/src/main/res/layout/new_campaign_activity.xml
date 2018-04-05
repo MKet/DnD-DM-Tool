@@ -87,7 +87,7 @@
         android:layout_marginTop="7dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/name"
+        android:hint="@string/name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnNewCampaign"
         app:layout_constraintStart_toStartOf="parent"
