@@ -64,17 +64,22 @@ public class HomeActivity extends AppCompatActivity{
         });
         setSpinnerCampaign();
 
+<<<<<<< HEAD
         Button btnNotes = (Button)findViewById(R.id.btnSeeNotes);
+=======
+        Button btnNotes = findViewById(R.id.btnSeeNotes);
+>>>>>>> 472b1180aa8995b58e1db81934f21495e99be2e3
         Intent intentNotes = new Intent(this,NoteActivity.class);
-        btnNotes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intentNotes.putExtra(NOTES,campaign);
-                startActivity(intentNotes);
-            }
+        btnNotes.setOnClickListener(v -> {
+            intentNotes.putExtra(NOTES,campaign);
+            startActivity(intentNotes);
         });
 
+<<<<<<< HEAD
         lstViewPlayers = (ListView) findViewById(R.id.lstPlayers);
+=======
+        lstViewPlayers = findViewById(R.id.lstPlayers);
+>>>>>>> 472b1180aa8995b58e1db81934f21495e99be2e3
         spinnerCampaign.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -82,9 +87,7 @@ public class HomeActivity extends AppCompatActivity{
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         Button combatButton = findViewById(R.id.combatTracker);

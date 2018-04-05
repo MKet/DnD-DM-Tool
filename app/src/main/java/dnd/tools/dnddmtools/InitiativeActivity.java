@@ -1,7 +1,7 @@
 package dnd.tools.dnddmtools;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
@@ -10,11 +10,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import Models.CampaignPlayer;
 
 import static DndUtil.DndUtil.RollD20;
-import static DndUtil.DndUtil.RollToModifier;
+import static DndUtil.DndUtil.ScoreToModifier;
 import static DndUtil.DndUtil.calculateExperience;
 
 public class InitiativeActivity extends AppCompatActivity {
@@ -25,7 +26,6 @@ public class InitiativeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_initiative);
 
         Bundle bundle = getIntent().getExtras();
-
 
         List<CampaignPlayer> players;
         {
@@ -83,7 +83,7 @@ public class InitiativeActivity extends AppCompatActivity {
 
                 int initiative;
                 if (initiativeInput.getText().toString().trim().length() == 0)
-                    initiative = RollToModifier(dexterity);
+                    initiative = ScoreToModifier(dexterity);
                 else
                     initiative = Integer.parseInt(initiativeInput.getText().toString());
 
@@ -111,21 +111,21 @@ public class InitiativeActivity extends AppCompatActivity {
                 initiativeInput.getText().clear();
                 rollInput.getText().clear();
             });
-
             roll.setOnClickListener((v) -> {
                 int rollResult = RollD20();
 
-                rollInput.setText(rollResult);
-
-                int experience = calculateExperience(adapter.getCRList(), players.size());
-
-                ExperienceFragment newFragment = ExperienceFragment.newInstance(experience);
-                newFragment.show(getSupportFragmentManager(), "dialog");
+                rollInput.setText(String.format(Locale.US, "%d", rollResult));
             });
 
             endTurn.setOnClickListener((v) -> adapter.nextTurn());
 
-            endCombat.setOnClickListener((v) -> adapter.clear());
+            endCombat.setOnClickListener((v) -> {
+                int experience = calculateExperience(adapter.getCRList(), players.size());
+
+                ExperienceFragment newFragment = ExperienceFragment.newInstance(experience);
+                newFragment.show(getSupportFragmentManager(), "dialog");
+                adapter.clear();
+            });
         }
     }
 }
