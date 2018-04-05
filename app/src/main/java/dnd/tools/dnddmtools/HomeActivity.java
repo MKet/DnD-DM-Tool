@@ -58,12 +58,9 @@ public class HomeActivity extends AppCompatActivity{
         dungeonMaster = (DungeonMaster) intentGetAccount.getParcelableExtra(MainActivity.DUNGEON_MASTER);
         Button btnNewCampaign = (Button)findViewById(R.id.btnNewCampaign);
         final Intent intent = new Intent(this,NewCampaignActivity.class);
-        btnNewCampaign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.putExtra(DUNGEONMASTER,dungeonMaster);
-                startActivity(intent);
-            }
+        btnNewCampaign.setOnClickListener(v -> {
+            intent.putExtra(DUNGEONMASTER,dungeonMaster);
+            startActivity(intent);
         });
         setSpinnerCampaign();
 
@@ -89,12 +86,20 @@ public class HomeActivity extends AppCompatActivity{
 
             }
         });
+
+        Button combatButton = findViewById(R.id.combatTracker);
+
+        combatButton.setOnClickListener((v) -> {
+            Intent combatIntent = new Intent(this, InitiativeActivity.class);
+            combatIntent.putParcelableArrayListExtra("campaignPlayers", (ArrayList<CampaignPlayer>) campaignPlayers);
+            startActivity(combatIntent);
+        });
     }
 
     private void setSpinnerCampaign(){
         campaigns = new ArrayList<>();
-        campaignArrayAdapter = new ArrayAdapter<Campaign>(this,android.R.layout.simple_list_item_1,campaigns);
-        spinnerCampaign = (Spinner)findViewById(R.id.spinner);
+        campaignArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,campaigns);
+        spinnerCampaign = findViewById(R.id.spinner);
         spinnerCampaign.setAdapter(campaignArrayAdapter);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Campaign");
@@ -123,16 +128,13 @@ public class HomeActivity extends AppCompatActivity{
     private void setLstViewPlayers(Campaign campaign){
         this.campaign = campaign;
         campaignPlayers = new ArrayList<>();
-        campaignPlayerArrayAdapter = new ArrayAdapter<CampaignPlayer>(this,android.R.layout.simple_list_item_1,campaignPlayers);
+        campaignPlayerArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,campaignPlayers);
         lstViewPlayers.setAdapter(campaignPlayerArrayAdapter);
 
         campaignPlayers.addAll(campaign.getPlayers());
         campaignPlayerArrayAdapter.notifyDataSetChanged();
-        lstViewPlayers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position],position);
-            }
+        lstViewPlayers.setOnItemClickListener((parent, view, position, id) -> {
+            goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position],position);
         });
 
     }

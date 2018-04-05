@@ -8,6 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.security.cert.CRL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -34,6 +39,16 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
                 return item1 == item2;
             }
         });
+    }
+
+    public List<Float> getCRList() {
+        List<Float> CRList = new ArrayList<>(Dataset.size());
+
+        for (int i = 0; i < Dataset.size(); i++) {
+            CRList.add((float)Dataset.get(i).getCR());
+        }
+
+        return CRList;
     }
 
     public void add(CreatureTurnItem o) {

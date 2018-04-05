@@ -16,7 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import DndUtil.DndUtil;
 import Models.Ability;
+import Models.AbilityValueWrapper;
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.DungeonMaster;
@@ -115,9 +117,17 @@ public class NewCampaignActivity extends AppCompatActivity {
         skills.add(new Skill("Performance",10, Ability.Charisma));
         skills.add(new Skill("Persuasion",10, Ability.Charisma));
 
+        player.setLevel(1);
 
+        List<AbilityValueWrapper> wrappers = new ArrayList<>();
+        wrappers.add(new AbilityValueWrapper(Ability.Strength,DndUtil.calculateProficiency(player.getLevel())));
+        wrappers.add(new AbilityValueWrapper(Ability.Charisma,DndUtil.calculateProficiency(player.getLevel())));
+        wrappers.add(new AbilityValueWrapper(Ability.Intelligence,DndUtil.calculateProficiency(player.getLevel())));
+        wrappers.add(new AbilityValueWrapper(Ability.Wisdom,DndUtil.calculateProficiency(player.getLevel())));
+        wrappers.add(new AbilityValueWrapper(Ability.Dexterity,DndUtil.calculateProficiency(player.getLevel())));
 
         player.setSkillList(skills);
+        player.setWrappers(wrappers);
         String id = reference.push().getKey();
         player.setId(id);
         players.add(player);

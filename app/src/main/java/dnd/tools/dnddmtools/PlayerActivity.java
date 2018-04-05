@@ -1,17 +1,16 @@
 package dnd.tools.dnddmtools;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,21 +19,12 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.Serializable;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import Models.Ability;
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.Skill;
-
-import static Models.Ability.Charisma;
-import static Models.Ability.Dexterity;
-import static Models.Ability.Intelligence;
-import static Models.Ability.Strength;
-import static Models.Ability.Wisdom;
 
 /**
  * Created by maxhe on 22-3-2018.
@@ -62,6 +52,12 @@ public class PlayerActivity extends AppCompatActivity {
     private EditText editText4;
     private EditText editText5;
 
+    private CheckBox checkBox1;
+    private CheckBox checkBox2;
+    private CheckBox checkBox3;
+    private CheckBox checkBox4;
+    private CheckBox checkBox5;
+
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
@@ -80,6 +76,12 @@ public class PlayerActivity extends AppCompatActivity {
         txt3 = (TextView)findViewById(R.id.textView3);
         txt4 = (TextView)findViewById(R.id.textView4);
         txt5 = (TextView)findViewById(R.id.textView5);
+
+        checkBox1 = (CheckBox)findViewById(R.id.checkBox1);
+        checkBox2 = (CheckBox)findViewById(R.id.checkBox2);
+        checkBox3 = (CheckBox)findViewById(R.id.checkBox3);
+        checkBox4 = (CheckBox)findViewById(R.id.checkBox4);
+        checkBox5 = (CheckBox)findViewById(R.id.checkBox5);
 
         editText1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -249,6 +251,10 @@ public class PlayerActivity extends AppCompatActivity {
         editText4.setVisibility(View.VISIBLE);
         editText5.setVisibility(View.VISIBLE);
 
+        checkBox2.setVisibility(View.VISIBLE);
+        checkBox3.setVisibility(View.VISIBLE);
+        checkBox4.setVisibility(View.VISIBLE);
+        checkBox5.setVisibility(View.VISIBLE);
 
         switch (ability){
             case Strength : layoutAbilityStrength(); break;
@@ -259,6 +265,7 @@ public class PlayerActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void layoutAbilityStrength(){
         txt1.setText("Athletics");
 
@@ -267,6 +274,7 @@ public class PlayerActivity extends AppCompatActivity {
                 if(s.getAbility().toString().equals("Strength")){
                     if(s.getName().equals("Athletics")){
                         editText1.setText(Integer.toString(s.getValue()));
+                        checkBox1.setChecked(s.isProficiancy());
                     }
                 }
             }
@@ -283,8 +291,14 @@ public class PlayerActivity extends AppCompatActivity {
         editText3.setVisibility(View.GONE);
         editText4.setVisibility(View.GONE);
         editText5.setVisibility(View.GONE);
+
+        checkBox2.setVisibility(View.GONE);
+        checkBox3.setVisibility(View.GONE);
+        checkBox4.setVisibility(View.GONE);
+        checkBox5.setVisibility(View.GONE);
     }
 
+    @SuppressLint("SetTextI18n")
     private void layoutAbilityDexterity(){
         try {
             for(Skill s : player.getSkillList()){
@@ -292,16 +306,19 @@ public class PlayerActivity extends AppCompatActivity {
                     if(s.getName().equals("Acrobatics")){
                         txt1.setText(s.getName());
                         editText1.setText(Integer.toString(s.getValue()));
+                        checkBox1.setChecked(s.isProficiancy());
                     }
 
                     if(s.getName().equals("Sleight of Hand")){
                         txt2.setText(s.getName());
                         editText2.setText(Integer.toString(s.getValue()));
+                        checkBox2.setChecked(s.isProficiancy());
                     }
 
                     if(s.getName().equals("Stealth")){
                         txt3.setText(s.getName());
                         editText3.setText(Integer.toString(s.getValue()));
+                        checkBox3.setChecked(s.isProficiancy());
                     }
 
                 }
@@ -315,96 +332,117 @@ public class PlayerActivity extends AppCompatActivity {
 
         editText4.setVisibility(View.GONE);
         editText5.setVisibility(View.GONE);
+
+        checkBox4.setVisibility(View.GONE);
+        checkBox5.setVisibility(View.GONE);
     }
 
+    @SuppressLint("SetTextI18n")
     private void layoutAbilityIntelligence(){
         for(Skill s : player.getSkillList()){
             if(s.getAbility().toString().equals("Intelligence")){
                 if(s.getName().equals("Arcana")){
                     txt1.setText(s.getName());
                     editText1.setText(Integer.toString(s.getValue()));
+                    checkBox1.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("History")){
                     txt2.setText(s.getName());
                     editText2.setText(Integer.toString(s.getValue()));
+                    checkBox2.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("Investigation")){
                     txt3.setText(s.getName());
                     editText3.setText(Integer.toString(s.getValue()));
+                    checkBox3.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("Nature")){
                     txt4.setText(s.getName());
                     editText4.setText(Integer.toString(s.getValue()));
+                    checkBox4.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("Religion")){
                     txt5.setText(s.getName());
                     editText5.setText(Integer.toString(s.getValue()));
+                    checkBox5.setChecked(s.isProficiancy());
                 }
             }
         }
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void layoutAbilityWisdom(){
         for(Skill s : player.getSkillList()){
             if(s.getAbility().toString().equals("Wisdom")){
                 if(s.getName().equals("Animal Handling")){
                     txt1.setText(s.getName());
                     editText1.setText(Integer.toString(s.getValue()));
+                    checkBox1.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("Insight")){
                     txt2.setText(s.getName());
                     editText2.setText(Integer.toString(s.getValue()));
+                    checkBox2.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("Medicine")){
                     txt3.setText(s.getName());
                     editText3.setText(Integer.toString(s.getValue()));
+                    checkBox3.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("Perception")){
                     txt4.setText(s.getName());
                     editText4.setText(Integer.toString(s.getValue()));
+                    checkBox4.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("Survival")){
                     txt5.setText(s.getName());
                     editText5.setText(Integer.toString(s.getValue()));
+                    checkBox5.setChecked(s.isProficiancy());
                 }
             }
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void layoutAbilityCharisma(){
         for(Skill s : player.getSkillList()){
             if(s.getAbility().toString().equals("Charisma")){
                 if(s.getName().equals("Deception")){
                     txt1.setText(s.getName());
                     editText1.setText(Integer.toString(s.getValue()));
+
                 }
 
                 if(s.getName().equals("Intimidation")){
                     txt2.setText(s.getName());
                     editText2.setText(Integer.toString(s.getValue()));
+                    checkBox2.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("Performance")){
                     txt3.setText(s.getName());
                     editText3.setText(Integer.toString(s.getValue()));
+                    checkBox3.setChecked(s.isProficiancy());
                 }
 
                 if(s.getName().equals("Persuasion")){
                     txt4.setText(s.getName());
                     editText4.setText(Integer.toString(s.getValue()));
+                    checkBox4.setChecked(s.isProficiancy());
                 }
             }
         }
 
+        checkBox5.setVisibility(View.GONE);
         editText5.setVisibility(View.GONE);
         txt5.setVisibility(View.GONE);
     }
