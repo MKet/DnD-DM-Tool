@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.security.cert.CRL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
+import Models.CreatureTurnItem;
 
 /**
  * Created by Marco on 3/22/2018.
@@ -41,14 +42,15 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         });
     }
 
-    public List<Float> getCRList() {
-        List<Float> CRList = new ArrayList<>(Dataset.size());
+    public List<CreatureTurnItem> getList() {
+        List<CreatureTurnItem> temp = new ArrayList<>();
 
-        for (int i = 0; i < Dataset.size(); i++) {
-            CRList.add((float)Dataset.get(i).getCR());
+        for(int i= 0; i < Dataset.size(); i++) {
+            CreatureTurnItem item = Dataset.get(i);
+            temp.add(item);
         }
 
-        return CRList;
+        return Collections.unmodifiableList(temp);
     }
 
     public void add(CreatureTurnItem o) {
