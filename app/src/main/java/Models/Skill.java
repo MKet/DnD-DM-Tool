@@ -13,6 +13,7 @@ public class Skill implements Serializable {
     private String name;
     private int value;
     private Ability ability;
+    private boolean proficiancy;
 
     public Skill() {
     }
@@ -39,6 +40,14 @@ public class Skill implements Serializable {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public boolean isProficiancy() {
+        return proficiancy;
+    }
+
+    public void setProficiancy(boolean proficiancy) {
+        this.proficiancy = proficiancy;
     }
 
     @Override

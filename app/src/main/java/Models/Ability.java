@@ -19,7 +19,7 @@ public enum Ability implements Serializable{
 
     private String name;
 
-    private Ability(String name){
+    Ability(String name){
         this.name = name;
     }
 

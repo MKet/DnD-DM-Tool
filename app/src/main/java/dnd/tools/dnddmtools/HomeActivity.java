@@ -55,8 +55,8 @@ public class HomeActivity extends AppCompatActivity{
         setContentView(R.layout.activity_home);
 
         Intent intentGetAccount = getIntent();
-        dungeonMaster = intentGetAccount.getParcelableExtra(MainActivity.DUNGEON_MASTER);
-        Button btnNewCampaign = findViewById(R.id.btnNewCampaign);
+        dungeonMaster = (DungeonMaster) intentGetAccount.getParcelableExtra(MainActivity.DUNGEON_MASTER);
+        Button btnNewCampaign = (Button)findViewById(R.id.btnNewCampaign);
         final Intent intent = new Intent(this,NewCampaignActivity.class);
         btnNewCampaign.setOnClickListener(v -> {
             intent.putExtra(DUNGEONMASTER,dungeonMaster);
@@ -64,14 +64,22 @@ public class HomeActivity extends AppCompatActivity{
         });
         setSpinnerCampaign();
 
+<<<<<<< HEAD
+        Button btnNotes = (Button)findViewById(R.id.btnSeeNotes);
+=======
         Button btnNotes = findViewById(R.id.btnSeeNotes);
+>>>>>>> 472b1180aa8995b58e1db81934f21495e99be2e3
         Intent intentNotes = new Intent(this,NoteActivity.class);
         btnNotes.setOnClickListener(v -> {
             intentNotes.putExtra(NOTES,campaign);
             startActivity(intentNotes);
         });
 
+<<<<<<< HEAD
+        lstViewPlayers = (ListView) findViewById(R.id.lstPlayers);
+=======
         lstViewPlayers = findViewById(R.id.lstPlayers);
+>>>>>>> 472b1180aa8995b58e1db81934f21495e99be2e3
         spinnerCampaign.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
