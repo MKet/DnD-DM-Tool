@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,8 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
+import java.util.Locale;
 
 import Models.Ability;
+import Models.AbilityValueWrapper;
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.Skill;
@@ -40,17 +43,20 @@ public class PlayerActivity extends AppCompatActivity {
     private TextView txtPlayerName;
     private Spinner spinnerAbility;
     private Button btnSave;
+
+    private EditText abilityScore;
+
     private TextView txt1;
     private TextView txt2;
     private TextView txt3;
     private TextView txt4;
     private TextView txt5;
 
-    private EditText editText1;
-    private EditText editText2;
-    private EditText editText3;
-    private EditText editText4;
-    private EditText editText5;
+    private TextView skill1;
+    private TextView skill2;
+    private TextView skill3;
+    private TextView skill4;
+    private TextView skill5;
 
     private CheckBox checkBox1;
     private CheckBox checkBox2;
@@ -63,154 +69,29 @@ public class PlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_player);
 
-        txtPlayerName = (TextView)findViewById(R.id.txtPlayername);
+        txtPlayerName = findViewById(R.id.txtPlayername);
+        abilityScore = findViewById(R.id.AbilityScore);
 
-        editText1 = (EditText)findViewById(R.id.editText1);
-        editText2 = (EditText)findViewById(R.id.editText2);
-        editText3 = (EditText)findViewById(R.id.editText3);
-        editText4 = (EditText)findViewById(R.id.editText4);
-        editText5 = (EditText)findViewById(R.id.editText5);
+        skill1 = findViewById(R.id.txtSkill1);
+        skill2 = findViewById(R.id.txtSkill2);
+        skill3 = findViewById(R.id.txtSkill3);
+        skill4 = findViewById(R.id.txtSkill4);
+        skill5 = findViewById(R.id.txtSkill5);
 
-        txt1 = (TextView)findViewById(R.id.textView1);
-        txt2 = (TextView)findViewById(R.id.textView2);
-        txt3 = (TextView)findViewById(R.id.textView3);
-        txt4 = (TextView)findViewById(R.id.textView4);
-        txt5 = (TextView)findViewById(R.id.textView5);
+        txt1 = findViewById(R.id.textView1);
+        txt2 = findViewById(R.id.textView2);
+        txt3 = findViewById(R.id.textView3);
+        txt4 = findViewById(R.id.textView4);
+        txt5 = findViewById(R.id.textView5);
 
-        checkBox1 = (CheckBox)findViewById(R.id.checkBox1);
-        checkBox2 = (CheckBox)findViewById(R.id.checkBox2);
-        checkBox3 = (CheckBox)findViewById(R.id.checkBox3);
-        checkBox4 = (CheckBox)findViewById(R.id.checkBox4);
-        checkBox5 = (CheckBox)findViewById(R.id.checkBox5);
+        checkBox1 = findViewById(R.id.checkBox1);
+        checkBox2 = findViewById(R.id.checkBox2);
+        checkBox3 = findViewById(R.id.checkBox3);
+        checkBox4 = findViewById(R.id.checkBox4);
+        checkBox5 = findViewById(R.id.checkBox5);
 
-        editText1.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                for(Skill skill : skills){
-                    if(skill.getName().equals(txt1.getText())){
-                        try {
-                            skill.setValue(Integer.valueOf(editText1.getText().toString()));
-                        } catch (NumberFormatException e) {
-                            Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }
-        });
-        editText2.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                for(Skill skill :skills){
-                    try {
-                        if(skill.getName().equals(Integer.valueOf(editText2.getText().toString()))){
-                            skill.setValue(Integer.valueOf(editText2.getText().toString()));
-                        }
-                    } catch (NumberFormatException e) {
-                        Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-        editText3.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                for(Skill skill : skills){
-                    try {
-                        if(skill.getName().equals(Integer.valueOf(editText3.getText().toString()))){
-                            skill.setValue(Integer.valueOf(editText3.getText().toString()));
-                        }
-                    } catch (NumberFormatException e) {
-                        Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-        editText4.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                for(Skill skill : skills){
-                    if(skill.getName().equals(txt4.getText())){
-                        try {
-                            skill.setValue(Integer.valueOf(editText4.getText().toString()));
-                        } catch (NumberFormatException e) {
-                            Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }
-        });
-        editText5.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                for(Skill skill : skills){
-                    if(skill.getName().equals(editText5.getText())){
-                        try {
-                            skill.setValue(Integer.valueOf(txt5.getText().toString()));
-                        } catch (NumberFormatException e) {
-                            Toast.makeText(getBaseContext(),"Field cannot be empty!",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }
-        });
-
-        btnSave = (Button)findViewById(R.id.btnSave);
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                savePlayer();
-            }
-        });
+        btnSave = findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(v -> savePlayer());
 
         Intent intent = getIntent();
         player = intent.getParcelableExtra(HomeActivity.CAMPAIGNPLAYER);
@@ -220,11 +101,44 @@ public class PlayerActivity extends AppCompatActivity {
         player.setSkillList(skills);
 
         txtPlayerName.setText(player.getName());
-        spinnerAbility = (Spinner) findViewById(R.id.spinnerAbility);
+        spinnerAbility = findViewById(R.id.spinnerAbility);
 
         ArrayAdapter<Ability> adapter = new ArrayAdapter<Ability>(this,android.R.layout.simple_list_item_1,Ability.values());
         adapter.notifyDataSetChanged();
         spinnerAbility.setAdapter(adapter);
+
+
+
+        checkBox1.setOnCheckedChangeListener((cb, b) -> {
+            for (Skill skill : skills)
+                if (skill.getName().equals(txt1.getText())) {
+                    skill.setProficiency(b);
+                }
+        });
+        checkBox2.setOnCheckedChangeListener((cb, b) -> {
+            for (Skill skill : skills)
+                if (skill.getName().equals(txt2.getText())) {
+                    skill.setProficiency(b);
+                }
+        });
+        checkBox3.setOnCheckedChangeListener((cb, b) -> {
+            for (Skill skill : skills)
+                if (skill.getName().equals(txt3.getText())) {
+                    skill.setProficiency(b);
+                }
+        });
+        checkBox4.setOnCheckedChangeListener((cb, b) -> {
+            for (Skill skill : skills)
+                if (skill.getName().equals(txt4.getText())) {
+                    skill.setProficiency(b);
+                }
+        });
+        checkBox5.setOnCheckedChangeListener((cb, b) -> {
+            for (Skill skill : skills)
+                if (skill.getName().equals(txt4.getText())) {
+                    skill.setProficiency(b);
+                }
+        });
 
         spinnerAbility.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -246,10 +160,11 @@ public class PlayerActivity extends AppCompatActivity {
         txt4.setVisibility(View.VISIBLE);
         txt5.setVisibility(View.VISIBLE);
 
-        editText2.setVisibility(View.VISIBLE);
-        editText3.setVisibility(View.VISIBLE);
-        editText4.setVisibility(View.VISIBLE);
-        editText5.setVisibility(View.VISIBLE);
+        skill1.setVisibility(View.VISIBLE);
+        skill2.setVisibility(View.VISIBLE);
+        skill3.setVisibility(View.VISIBLE);
+        skill4.setVisibility(View.VISIBLE);
+        skill5.setVisibility(View.VISIBLE);
 
         checkBox2.setVisibility(View.VISIBLE);
         checkBox3.setVisibility(View.VISIBLE);
@@ -265,16 +180,25 @@ public class PlayerActivity extends AppCompatActivity {
         }
     }
 
+    private int getAbilityScore(Ability ability) {
+        for (AbilityValueWrapper abilityValueWrapper : player.getWrappers()) {
+            if (abilityValueWrapper.getAbility().equals(ability))
+                return abilityValueWrapper.getValue();
+        }
+        throw new IllegalArgumentException("Ability does not exist");
+    }
+
     @SuppressLint("SetTextI18n")
     private void layoutAbilityStrength(){
+        abilityScore.setText(Integer.toString(getAbilityScore(Ability.Strength)));
         txt1.setText("Athletics");
 
         try {
             for(Skill s : player.getSkillList()){
                 if(s.getAbility().toString().equals("Strength")){
                     if(s.getName().equals("Athletics")){
-                        editText1.setText(Integer.toString(s.getValue()));
-                        checkBox1.setChecked(s.isProficiancy());
+                        skill1.setText(Integer.toString(s.getValue()));
+                        checkBox1.setChecked(s.hasProficiency());
                     }
                 }
             }
@@ -287,10 +211,10 @@ public class PlayerActivity extends AppCompatActivity {
         txt4.setVisibility(View.GONE);
         txt5.setVisibility(View.GONE);
 
-        editText2.setVisibility(View.GONE);
-        editText3.setVisibility(View.GONE);
-        editText4.setVisibility(View.GONE);
-        editText5.setVisibility(View.GONE);
+        skill2.setVisibility(View.GONE);
+        skill3.setVisibility(View.GONE);
+        skill4.setVisibility(View.GONE);
+        skill5.setVisibility(View.GONE);
 
         checkBox2.setVisibility(View.GONE);
         checkBox3.setVisibility(View.GONE);
@@ -300,25 +224,26 @@ public class PlayerActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void layoutAbilityDexterity(){
+        abilityScore.setText(Integer.toString(getAbilityScore(Ability.Dexterity)));
         try {
             for(Skill s : player.getSkillList()){
                 if(s.getAbility().toString().equals("Dexterity")){
                     if(s.getName().equals("Acrobatics")){
                         txt1.setText(s.getName());
-                        editText1.setText(Integer.toString(s.getValue()));
-                        checkBox1.setChecked(s.isProficiancy());
+                        skill1.setText(Integer.toString(s.getValue()));
+                        checkBox1.setChecked(s.hasProficiency());
                     }
 
                     if(s.getName().equals("Sleight of Hand")){
                         txt2.setText(s.getName());
-                        editText2.setText(Integer.toString(s.getValue()));
-                        checkBox2.setChecked(s.isProficiancy());
+                        skill2.setText(Integer.toString(s.getValue()));
+                        checkBox2.setChecked(s.hasProficiency());
                     }
 
                     if(s.getName().equals("Stealth")){
                         txt3.setText(s.getName());
-                        editText3.setText(Integer.toString(s.getValue()));
-                        checkBox3.setChecked(s.isProficiancy());
+                        skill3.setText(Integer.toString(s.getValue()));
+                        checkBox3.setChecked(s.hasProficiency());
                     }
 
                 }
@@ -330,8 +255,8 @@ public class PlayerActivity extends AppCompatActivity {
         txt4.setVisibility(View.GONE);
         txt5.setVisibility(View.GONE);
 
-        editText4.setVisibility(View.GONE);
-        editText5.setVisibility(View.GONE);
+        skill4.setVisibility(View.GONE);
+        skill5.setVisibility(View.GONE);
 
         checkBox4.setVisibility(View.GONE);
         checkBox5.setVisibility(View.GONE);
@@ -339,36 +264,29 @@ public class PlayerActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void layoutAbilityIntelligence(){
+        abilityScore.setText(Integer.toString(getAbilityScore(Ability.Intelligence)));
         for(Skill s : player.getSkillList()){
             if(s.getAbility().toString().equals("Intelligence")){
                 if(s.getName().equals("Arcana")){
                     txt1.setText(s.getName());
-                    editText1.setText(Integer.toString(s.getValue()));
-                    checkBox1.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("History")){
+                    skill1.setText(Integer.toString(s.getValue()));
+                    checkBox1.setChecked(s.hasProficiency());
+                }else if(s.getName().equals("History")){
                     txt2.setText(s.getName());
-                    editText2.setText(Integer.toString(s.getValue()));
-                    checkBox2.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("Investigation")){
+                    skill2.setText(Integer.toString(s.getValue()));
+                    checkBox2.setChecked(s.hasProficiency());
+                }else if(s.getName().equals("Investigation")){
                     txt3.setText(s.getName());
-                    editText3.setText(Integer.toString(s.getValue()));
-                    checkBox3.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("Nature")){
+                    skill3.setText(Integer.toString(s.getValue()));
+                    checkBox3.setChecked(s.hasProficiency());
+                }else if(s.getName().equals("Nature")){
                     txt4.setText(s.getName());
-                    editText4.setText(Integer.toString(s.getValue()));
-                    checkBox4.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("Religion")){
+                    skill4.setText(Integer.toString(s.getValue()));
+                    checkBox4.setChecked(s.hasProficiency());
+                }else if(s.getName().equals("Religion")){
                     txt5.setText(s.getName());
-                    editText5.setText(Integer.toString(s.getValue()));
-                    checkBox5.setChecked(s.isProficiancy());
+                    skill5.setText(Integer.toString(s.getValue()));
+                    checkBox5.setChecked(s.hasProficiency());
                 }
             }
         }
@@ -377,36 +295,29 @@ public class PlayerActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void layoutAbilityWisdom(){
+        abilityScore.setText(Integer.toString(getAbilityScore(Ability.Wisdom)));
         for(Skill s : player.getSkillList()){
             if(s.getAbility().toString().equals("Wisdom")){
                 if(s.getName().equals("Animal Handling")){
                     txt1.setText(s.getName());
-                    editText1.setText(Integer.toString(s.getValue()));
-                    checkBox1.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("Insight")){
+                    skill1.setText(Integer.toString(s.getValue()));
+                    checkBox1.setChecked(s.hasProficiency());
+                }else if(s.getName().equals("Insight")){
                     txt2.setText(s.getName());
-                    editText2.setText(Integer.toString(s.getValue()));
-                    checkBox2.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("Medicine")){
+                    skill2.setText(Integer.toString(s.getValue()));
+                    checkBox2.setChecked(s.hasProficiency());
+                }else if(s.getName().equals("Medicine")){
                     txt3.setText(s.getName());
-                    editText3.setText(Integer.toString(s.getValue()));
-                    checkBox3.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("Perception")){
+                    skill3.setText(Integer.toString(s.getValue()));
+                    checkBox3.setChecked(s.hasProficiency());
+                }else  if(s.getName().equals("Perception")){
                     txt4.setText(s.getName());
-                    editText4.setText(Integer.toString(s.getValue()));
-                    checkBox4.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("Survival")){
+                    skill4.setText(Integer.toString(s.getValue()));
+                    checkBox4.setChecked(s.hasProficiency());
+                }else if(s.getName().equals("Survival")){
                     txt5.setText(s.getName());
-                    editText5.setText(Integer.toString(s.getValue()));
-                    checkBox5.setChecked(s.isProficiancy());
+                    skill5.setText(Integer.toString(s.getValue()));
+                    checkBox5.setChecked(s.hasProficiency());
                 }
             }
         }
@@ -414,36 +325,31 @@ public class PlayerActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void layoutAbilityCharisma(){
+        abilityScore.setText(Integer.toString(getAbilityScore(Ability.Charisma)));
         for(Skill s : player.getSkillList()){
             if(s.getAbility().toString().equals("Charisma")){
                 if(s.getName().equals("Deception")){
                     txt1.setText(s.getName());
-                    editText1.setText(Integer.toString(s.getValue()));
+                    skill1.setText(Integer.toString(s.getValue()));
 
-                }
-
-                if(s.getName().equals("Intimidation")){
+                }else if(s.getName().equals("Intimidation")){
                     txt2.setText(s.getName());
-                    editText2.setText(Integer.toString(s.getValue()));
-                    checkBox2.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("Performance")){
+                    skill2.setText(Integer.toString(s.getValue()));
+                    checkBox2.setChecked(s.hasProficiency());
+                }else if(s.getName().equals("Performance")){
                     txt3.setText(s.getName());
-                    editText3.setText(Integer.toString(s.getValue()));
-                    checkBox3.setChecked(s.isProficiancy());
-                }
-
-                if(s.getName().equals("Persuasion")){
+                    skill3.setText(Integer.toString(s.getValue()));
+                    checkBox3.setChecked(s.hasProficiency());
+                }else if(s.getName().equals("Persuasion")){
                     txt4.setText(s.getName());
-                    editText4.setText(Integer.toString(s.getValue()));
-                    checkBox4.setChecked(s.isProficiancy());
+                    skill4.setText(Integer.toString(s.getValue()));
+                    checkBox4.setChecked(s.hasProficiency());
                 }
             }
         }
 
         checkBox5.setVisibility(View.GONE);
-        editText5.setVisibility(View.GONE);
+        skill5.setVisibility(View.GONE);
         txt5.setVisibility(View.GONE);
     }
 

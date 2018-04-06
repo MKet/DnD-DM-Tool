@@ -23,12 +23,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="43dp"
-        android:layout_marginEnd="318dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        android:text="Playername"
+        android:text="@string/playername"
+        android:labelFor="@id/editPersonName"
         app:layout_constraintBottom_toTopOf="@+id/spinnerAbility"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="17dp"
-        android:text="Ability:"
+        android:text="@string/ability"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPlayername" />
 
@@ -50,135 +51,137 @@
         android:layout_marginEnd="9dp"
         android:layout_marginStart="287dp"
         android:layout_marginTop="230dp"
-        android:text="Save"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerAbility" />
 
     <TextView
+        android:id="@+id/txtSkill1"
+        android:layout_width="99dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="148dp"
+        android:ems="10"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textView1"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="57dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/editText1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerAbility" />
 
-    <EditText
-        android:id="@+id/editText1"
+    <TextView
+        android:id="@+id/txtSkill2"
         android:layout_width="99dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox1"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerAbility" />
+        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
+        app:layout_constraintTop_toBottomOf="@+id/txtSkill1" />
 
     <CheckBox
-        android:id="@+id/checkBox1"
+        android:id="@+id/checkBox4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="47dp"
-        android:layout_marginTop="49dp"
-        android:text="Proficiency"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/proficiency"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerAbility" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editPersonName"
         android:layout_width="99dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="188dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
-        app:layout_constraintTop_toBottomOf="@+id/editText1" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="27dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/editText3"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <EditText
-        android:id="@+id/editText3"
+    <TextView
+        android:id="@+id/txtSkill3"
         android:layout_width="99dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox3"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
+        app:layout_constraintTop_toBottomOf="@+id/txtSkill2" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/checkBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="47dp"
-        android:layout_marginTop="19dp"
-        android:text="Proficiency"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/proficiency"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="27dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/editText4"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/txtSkill4"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <EditText
-        android:id="@+id/editText4"
+    <TextView
+        android:id="@+id/txtSkill4"
         android:layout_width="99dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox3"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
+        app:layout_constraintTop_toBottomOf="@+id/txtSkill3" />
 
     <CheckBox
-        android:id="@+id/checkBox4"
+        android:id="@+id/checkBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="47dp"
-        android:layout_marginTop="19dp"
-        android:text="Proficiency"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/proficiency"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="27dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/editText5"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <CheckBox
         android:id="@+id/checkBox5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="47dp"
-        android:layout_marginTop="19dp"
-        android:text="Proficiency"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/proficiency"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
@@ -186,38 +189,49 @@
         android:id="@+id/textView2"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="27dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        android:layout_marginStart="16dp"
+
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="47dp"
-        android:layout_marginTop="19dp"
-        android:text="Proficiency"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="144dp"
+        android:text="@string/proficiency"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
-
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="99dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox4"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="100dp"
+        android:id="@+id/txtSkill5"
+        android:layout_width="99dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox5"
+        app:layout_constraintTop_toBottomOf="@+id/txtSkill4" />
+
+    <TextView
+        android:id="@+id/Score"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Proficiency"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="101dp" />
+        android:layout_marginTop="12dp"
+        android:text="Modifier"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAbility"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/AbilityScore"
+        android:layout_width="71dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAbility"
+        tools:layout_editor_absoluteX="85dp" />
 
 </android.support.constraint.ConstraintLayout>

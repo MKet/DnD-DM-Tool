@@ -46,27 +46,16 @@ public class NewCampaignActivity extends AppCompatActivity {
         setContentView(R.layout.new_campaign_activity);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        Button btnAddPlayer = (Button)findViewById(R.id.btnAddPlayer);
-        Button btnAddCampaign = (Button)findViewById(R.id.btnNewCampaign);
-        lstPlayers = (ListView)findViewById(R.id.lstPlayers);
-        txtPlayername = (EditText)findViewById(R.id.txtPlayername);
-        txtCampaignname = (EditText)findViewById(R.id.txtCampaignName);
+        Button btnAddPlayer = findViewById(R.id.btnAddPlayer);
+        Button btnAddCampaign = findViewById(R.id.btnNewCampaign);
+        lstPlayers = findViewById(R.id.lstPlayers);
+        txtPlayername = findViewById(R.id.txtPlayername);
+        txtCampaignname = findViewById(R.id.txtCampaignName);
 
-
-        btnAddPlayer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addPlayer();
-            }
-        });
+        btnAddPlayer.setOnClickListener(v -> addPlayer());
         setListView();
 
-        btnAddCampaign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addCampaign();
-            }
-        });
+        btnAddCampaign.setOnClickListener(v -> addCampaign());
     }
 
     private void addCampaign(){
@@ -74,7 +63,7 @@ public class NewCampaignActivity extends AppCompatActivity {
         campaign.setPlayers(players);
 
         Intent intent = getIntent();
-        DungeonMaster dungeonMaster = (DungeonMaster) intent.getParcelableExtra(HomeActivity.DUNGEONMASTER);
+        DungeonMaster dungeonMaster = intent.getParcelableExtra(HomeActivity.DUNGEONMASTER);
 
         campaign.setDungeonMaster(dungeonMaster.getId());
         campaign.setName(txtCampaignname.getText().toString());
@@ -89,54 +78,14 @@ public class NewCampaignActivity extends AppCompatActivity {
     }
 
     private void addPlayer(){
-        CampaignPlayer player = new CampaignPlayer();
-
-        player.setName(txtPlayername.getText().toString());
-
-        List<Skill> skills = new ArrayList<>();
-        skills.add(new Skill("Athletics",10, Ability.Strength));
-
-        skills.add(new Skill("Acrobatics",10, Ability.Dexterity));
-        skills.add(new Skill("Sleight of Hand",10, Ability.Dexterity));
-        skills.add(new Skill("Stealth",10, Ability.Dexterity));
-
-        skills.add(new Skill("Arcana",10, Ability.Intelligence));
-        skills.add(new Skill("History",10, Ability.Intelligence));
-        skills.add(new Skill("Investigation",10, Ability.Intelligence));
-        skills.add(new Skill("Nature",10, Ability.Intelligence));
-        skills.add(new Skill("Religion",10, Ability.Intelligence));
-
-        skills.add(new Skill("Animal Handling",10, Ability.Wisdom));
-        skills.add(new Skill("Insight",10, Ability.Wisdom));
-        skills.add(new Skill("Medicine",10, Ability.Wisdom));
-        skills.add(new Skill("Perception",10, Ability.Wisdom));
-        skills.add(new Skill("Survival",10, Ability.Wisdom));
-
-        skills.add(new Skill("Deception",10, Ability.Charisma));
-        skills.add(new Skill("Intimidation",10, Ability.Charisma));
-        skills.add(new Skill("Performance",10, Ability.Charisma));
-        skills.add(new Skill("Persuasion",10, Ability.Charisma));
-
-        player.setLevel(1);
-
-        List<AbilityValueWrapper> wrappers = new ArrayList<>();
-        wrappers.add(new AbilityValueWrapper(Ability.Strength,DndUtil.calculateProficiency(player.getLevel())));
-        wrappers.add(new AbilityValueWrapper(Ability.Charisma,DndUtil.calculateProficiency(player.getLevel())));
-        wrappers.add(new AbilityValueWrapper(Ability.Intelligence,DndUtil.calculateProficiency(player.getLevel())));
-        wrappers.add(new AbilityValueWrapper(Ability.Wisdom,DndUtil.calculateProficiency(player.getLevel())));
-        wrappers.add(new AbilityValueWrapper(Ability.Dexterity,DndUtil.calculateProficiency(player.getLevel())));
-
-        player.setSkillList(skills);
-        player.setWrappers(wrappers);
-        String id = reference.push().getKey();
-        player.setId(id);
+        CampaignPlayer player = new CampaignPlayer(txtPlayername.getText().toString(), reference.push().getKey());
         players.add(player);
         adapter.notifyDataSetChanged();
         txtPlayername.setText("");
     }
 
     private void setListView(){
-        adapter = new ArrayAdapter<CampaignPlayer>(this,android.R.layout.simple_list_item_1,players);
+        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,players);
         lstPlayers.setAdapter(adapter);
     }
 }

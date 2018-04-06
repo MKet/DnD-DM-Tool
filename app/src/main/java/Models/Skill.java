@@ -5,22 +5,21 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
+import DndUtil.DndUtil;
+
 /**
  * Created by maxhe on 15-3-2018.
  */
 
 public class Skill implements Serializable {
     private String name;
-    private int value;
-    private Ability ability;
-    private boolean proficiancy;
+    private int playerLevel;
+    private AbilityValueWrapper ability;
+    private boolean proficiency = false;
 
-    public Skill() {
-    }
-
-    public Skill(String name, int value, Ability ability) {
+    public Skill(String name, int playerLevel, AbilityValueWrapper ability) {
         this.name = name;
-        this.value = value;
+        this.playerLevel = playerLevel;
         this.ability = ability;
     }
 
@@ -31,28 +30,29 @@ public class Skill implements Serializable {
 
     public int getValue()
     {
-        return value;
+        return DndUtil.ScoreToModifier(ability.getValue()) +
+                ((proficiency)? DndUtil.calculateProficiency(playerLevel) : 0);
     }
 
-    public Ability getAbility() {
+    public AbilityValueWrapper getAbility() {
         return ability;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public boolean hasProficiency() {
+        return proficiency;
     }
 
-    public boolean isProficiancy() {
-        return proficiancy;
+    public void setProficiency(boolean proficiency) {
+        this.proficiency = proficiency;
     }
 
-    public void setProficiancy(boolean proficiancy) {
-        this.proficiancy = proficiancy;
+    public void toggleProficiency() {
+        proficiency = !proficiency;
     }
 
     @Override
     public String toString(){
-        return name + " : " + value;
+        return name + " : " + getValue();
     }
 }
 
