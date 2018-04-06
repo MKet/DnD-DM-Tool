@@ -75,11 +75,7 @@ public class HomeActivity extends AppCompatActivity{
             startActivity(intentNotes);
         });
 
-<<<<<<< HEAD
-        lstViewPlayers = (ListView) findViewById(R.id.lstPlayers);
-=======
         lstViewPlayers = findViewById(R.id.lstPlayers);
->>>>>>> 472b1180aa8995b58e1db81934f21495e99be2e3
         spinnerCampaign.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
