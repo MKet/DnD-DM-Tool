@@ -79,6 +79,7 @@ public class NewCampaignActivity extends AppCompatActivity {
 
     private void addPlayer(){
         CampaignPlayer player = new CampaignPlayer(txtPlayername.getText().toString(), reference.push().getKey());
+
         players.add(player);
         adapter.notifyDataSetChanged();
         txtPlayername.setText("");

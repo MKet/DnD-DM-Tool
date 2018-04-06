@@ -197,7 +197,7 @@ public class PlayerActivity extends AppCompatActivity {
             for(Skill s : player.getSkillList()){
                 if(s.getAbility().toString().equals("Strength")){
                     if(s.getName().equals("Athletics")){
-                        skill1.setText(Integer.toString(s.getValue()));
+                        skill1.setText(Integer.toString(s.calculateValue()));
                         checkBox1.setChecked(s.hasProficiency());
                     }
                 }
@@ -230,19 +230,19 @@ public class PlayerActivity extends AppCompatActivity {
                 if(s.getAbility().toString().equals("Dexterity")){
                     if(s.getName().equals("Acrobatics")){
                         txt1.setText(s.getName());
-                        skill1.setText(Integer.toString(s.getValue()));
+                        skill1.setText(Integer.toString(s.calculateValue()));
                         checkBox1.setChecked(s.hasProficiency());
                     }
 
                     if(s.getName().equals("Sleight of Hand")){
                         txt2.setText(s.getName());
-                        skill2.setText(Integer.toString(s.getValue()));
+                        skill2.setText(Integer.toString(s.calculateValue()));
                         checkBox2.setChecked(s.hasProficiency());
                     }
 
                     if(s.getName().equals("Stealth")){
                         txt3.setText(s.getName());
-                        skill3.setText(Integer.toString(s.getValue()));
+                        skill3.setText(Integer.toString(s.calculateValue()));
                         checkBox3.setChecked(s.hasProficiency());
                     }
 
@@ -269,23 +269,23 @@ public class PlayerActivity extends AppCompatActivity {
             if(s.getAbility().toString().equals("Intelligence")){
                 if(s.getName().equals("Arcana")){
                     txt1.setText(s.getName());
-                    skill1.setText(Integer.toString(s.getValue()));
+                    skill1.setText(Integer.toString(s.calculateValue()));
                     checkBox1.setChecked(s.hasProficiency());
                 }else if(s.getName().equals("History")){
                     txt2.setText(s.getName());
-                    skill2.setText(Integer.toString(s.getValue()));
+                    skill2.setText(Integer.toString(s.calculateValue()));
                     checkBox2.setChecked(s.hasProficiency());
                 }else if(s.getName().equals("Investigation")){
                     txt3.setText(s.getName());
-                    skill3.setText(Integer.toString(s.getValue()));
+                    skill3.setText(Integer.toString(s.calculateValue()));
                     checkBox3.setChecked(s.hasProficiency());
                 }else if(s.getName().equals("Nature")){
                     txt4.setText(s.getName());
-                    skill4.setText(Integer.toString(s.getValue()));
+                    skill4.setText(Integer.toString(s.calculateValue()));
                     checkBox4.setChecked(s.hasProficiency());
                 }else if(s.getName().equals("Religion")){
                     txt5.setText(s.getName());
-                    skill5.setText(Integer.toString(s.getValue()));
+                    skill5.setText(Integer.toString(s.calculateValue()));
                     checkBox5.setChecked(s.hasProficiency());
                 }
             }
@@ -300,23 +300,23 @@ public class PlayerActivity extends AppCompatActivity {
             if(s.getAbility().toString().equals("Wisdom")){
                 if(s.getName().equals("Animal Handling")){
                     txt1.setText(s.getName());
-                    skill1.setText(Integer.toString(s.getValue()));
+                    skill1.setText(Integer.toString(s.calculateValue()));
                     checkBox1.setChecked(s.hasProficiency());
                 }else if(s.getName().equals("Insight")){
                     txt2.setText(s.getName());
-                    skill2.setText(Integer.toString(s.getValue()));
+                    skill2.setText(Integer.toString(s.calculateValue()));
                     checkBox2.setChecked(s.hasProficiency());
                 }else if(s.getName().equals("Medicine")){
                     txt3.setText(s.getName());
-                    skill3.setText(Integer.toString(s.getValue()));
+                    skill3.setText(Integer.toString(s.calculateValue()));
                     checkBox3.setChecked(s.hasProficiency());
                 }else  if(s.getName().equals("Perception")){
                     txt4.setText(s.getName());
-                    skill4.setText(Integer.toString(s.getValue()));
+                    skill4.setText(Integer.toString(s.calculateValue()));
                     checkBox4.setChecked(s.hasProficiency());
                 }else if(s.getName().equals("Survival")){
                     txt5.setText(s.getName());
-                    skill5.setText(Integer.toString(s.getValue()));
+                    skill5.setText(Integer.toString(s.calculateValue()));
                     checkBox5.setChecked(s.hasProficiency());
                 }
             }
@@ -330,19 +330,19 @@ public class PlayerActivity extends AppCompatActivity {
             if(s.getAbility().toString().equals("Charisma")){
                 if(s.getName().equals("Deception")){
                     txt1.setText(s.getName());
-                    skill1.setText(Integer.toString(s.getValue()));
+                    skill1.setText(Integer.toString(s.calculateValue()));
 
                 }else if(s.getName().equals("Intimidation")){
                     txt2.setText(s.getName());
-                    skill2.setText(Integer.toString(s.getValue()));
+                    skill2.setText(Integer.toString(s.calculateValue()));
                     checkBox2.setChecked(s.hasProficiency());
                 }else if(s.getName().equals("Performance")){
                     txt3.setText(s.getName());
-                    skill3.setText(Integer.toString(s.getValue()));
+                    skill3.setText(Integer.toString(s.calculateValue()));
                     checkBox3.setChecked(s.hasProficiency());
                 }else if(s.getName().equals("Persuasion")){
                     txt4.setText(s.getName());
-                    skill4.setText(Integer.toString(s.getValue()));
+                    skill4.setText(Integer.toString(s.calculateValue()));
                     checkBox4.setChecked(s.hasProficiency());
                 }
             }

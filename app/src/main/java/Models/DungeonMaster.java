@@ -22,6 +22,10 @@ public class DungeonMaster implements Parcelable{
         name = account.getDisplayName();
     }
 
+    public DungeonMaster(){
+
+    }
+
     public String getId() {
         return id;
     }

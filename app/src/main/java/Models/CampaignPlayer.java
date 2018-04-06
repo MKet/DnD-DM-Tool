@@ -20,6 +20,11 @@ public class CampaignPlayer implements Parcelable{
     private String name;
     private int level;
     private List<AbilityValueWrapper> abilities;
+
+    public CampaignPlayer(){
+
+    }
+
     public CampaignPlayer(String name, String id){
         setName(name);
         this.id = id;
@@ -58,6 +63,8 @@ public class CampaignPlayer implements Parcelable{
         skillList.add(new Skill("Performance",level, charisma));
         skillList.add(new Skill("Persuasion",level, charisma));
 
+        setSkillList(skillList);
+
     }
 
 
@@ -79,7 +86,7 @@ public class CampaignPlayer implements Parcelable{
         }
     };
 
-    public List<Skill> getSkillList() {
+    public List<Skill> getSkillList(){
         return skillList;
     }
 
@@ -117,6 +124,18 @@ public class CampaignPlayer implements Parcelable{
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public List<AbilityValueWrapper> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<AbilityValueWrapper> abilities) {
+        this.abilities = abilities;
+    }
+
+    public static Creator<CampaignPlayer> getCREATOR() {
+        return CREATOR;
     }
 
     @Override
