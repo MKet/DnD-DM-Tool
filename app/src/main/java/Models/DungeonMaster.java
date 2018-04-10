@@ -22,6 +22,7 @@ public class DungeonMaster implements Parcelable, Serializable {
     public DungeonMaster(GoogleSignInAccount account){
         id = account.getId();
         name = account.getDisplayName();
+        campaigns = new ArrayList<>();
     }
 
     public void setId(String id) {
@@ -79,7 +80,6 @@ public class DungeonMaster implements Parcelable, Serializable {
         name = in.readString();
 
         int size = in.readInt();
-
         campaigns = new ArrayList<>();
         for(int i = 0; i< size; i++) {
             Campaign.CREATOR.createFromParcel(in);
@@ -90,6 +90,7 @@ public class DungeonMaster implements Parcelable, Serializable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(name);
+
         dest.writeInt(campaigns.size());
         for(Campaign campaign : campaigns) {
             campaign.writeToParcel(dest, flags);

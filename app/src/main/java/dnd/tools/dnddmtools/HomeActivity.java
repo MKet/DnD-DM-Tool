@@ -102,9 +102,7 @@ public class HomeActivity extends AppCompatActivity{
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-
                     Campaign campaign = snapshot.getValue(Campaign.class);
                     String id = snapshot.getKey();
                     campaign.setId(id);
@@ -113,10 +111,7 @@ public class HomeActivity extends AppCompatActivity{
                 campaignArrayAdapter.notifyDataSetChanged();
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            @Override public void onCancelled(DatabaseError databaseError) {}
         });
     }
 
@@ -131,15 +126,13 @@ public class HomeActivity extends AppCompatActivity{
         lstViewPlayers.setOnItemClickListener((parent, view, position, id) -> {
             goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position],position);
         });
-
     }
 
     private void goToPlayerStats(CampaignPlayer player, int position){
-        Intent intent = new Intent(this,PlayerActivity.class);
+        Intent intent = new Intent(this, PlayerActivity.class);
         intent.putExtra(CAMPAIGNPLAYER, (Parcelable) player);
         intent.putExtra(CAMPAIGN, (Parcelable) campaign);
-        intent.putExtra(POSITION,position);
-
+        intent.putExtra(POSITION, position);
 
         startActivity(intent);
     }
