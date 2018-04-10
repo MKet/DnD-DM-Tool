@@ -24,6 +24,18 @@ public class DungeonMaster implements Parcelable, Serializable {
         name = account.getDisplayName();
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public DungeonMaster(){
 
     }
@@ -81,7 +93,6 @@ public class DungeonMaster implements Parcelable, Serializable {
         dest.writeInt(campaigns.size());
         for(Campaign campaign : campaigns) {
             campaign.writeToParcel(dest, flags);
-
         }
     }
 }
