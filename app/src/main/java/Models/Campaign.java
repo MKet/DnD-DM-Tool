@@ -4,13 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by maxhe on 15-3-2018.
  */
 
-public class Campaign implements Parcelable{
+public class Campaign implements Parcelable, Serializable{
 
     private String id;
     private String name;
@@ -20,14 +21,6 @@ public class Campaign implements Parcelable{
 
     public Campaign(){
 
-    }
-
-    protected Campaign(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-        players = in.createTypedArrayList(CampaignPlayer.CREATOR);
-        note = in.readString();
-        dungeonMaster = in.readString();
     }
 
     public static final Creator<Campaign> CREATOR = new Creator<Campaign>() {
@@ -92,11 +85,29 @@ public class Campaign implements Parcelable{
         return 0;
     }
 
+
+    protected Campaign(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+
+        players = new ArrayList<>();
+        int size = in.readInt();
+        for(int i = 0; i < size; i++) {
+            players.add(CampaignPlayer.CREATOR.createFromParcel(in));
+        }
+        note = in.readString();
+        dungeonMaster = in.readString();
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(name);
-        dest.writeTypedList(players);
+        int size = players.size();
+        dest.writeInt(size);
+        for (CampaignPlayer player : players) {
+            player.writeToParcel(dest, flags);
+        }
         dest.writeString(note);
         dest.writeString(dungeonMaster);
     }

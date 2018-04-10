@@ -3,25 +3,17 @@ package Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * Created by maxhe on 5-4-2018.
  */
 
-public class PlayerAbility implements Parcelable {
+public class PlayerAbility implements Parcelable, Serializable {
     private Abilities abilities;
     private Integer value;
     private Map<Skills, Skill> skills;
-
-    protected PlayerAbility(Parcel in) {
-        this();
-        if (in.readByte() == 0) {
-            value = null;
-        } else {
-            value = in.readInt();
-        }
-    }
 
     public Map<Skills, Skill> getSkills() {
         return skills;
@@ -76,11 +68,35 @@ public class PlayerAbility implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(abilities.ordinal());
         if (value == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
             dest.writeInt(value);
+        }
+
+        dest.writeInt(skills.size());
+        for(Map.Entry<Skills, Skill> entry : skills.entrySet()){
+            dest.writeInt(entry.getKey().ordinal());
+            entry.getValue().writeToParcel(dest, flags);
+        }
+    }
+
+    protected PlayerAbility(Parcel in) {
+        abilities = Abilities.values()[in.readInt()];
+
+        if (in.readByte() == 0) {
+            value = null;
+        } else {
+            value = in.readInt();
+        }
+
+        int size = in.readInt();
+        for(int i = 0; i < size; i++){
+            Skills key = Skills.values()[in.readInt()];
+            Skill value = Skill.CREATOR.createFromParcel(in);
+            skills.put(key,value);
         }
     }
 }

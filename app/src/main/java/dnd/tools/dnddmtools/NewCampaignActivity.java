@@ -2,6 +2,7 @@ package dnd.tools.dnddmtools;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -68,7 +69,7 @@ public class NewCampaignActivity extends AppCompatActivity {
         reference.child("Campaign").child(key).child("name").setValue(campaign.getName());
         reference.child("Campaign").child(key).child("players").setValue(campaign.getPlayers());
         Intent intentBack = new Intent(this,HomeActivity.class);
-        intent.putExtra(DUNGEON_MASTER,dungeonMaster);
+        intent.putExtra(DUNGEON_MASTER, (Parcelable)dungeonMaster);
         startActivity(intentBack);
     }
 

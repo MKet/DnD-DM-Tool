@@ -1,6 +1,7 @@
 package dnd.tools.dnddmtools;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             GoogleSignInAccount account = result.getSignInAccount();
             DungeonMaster dungeonMaster = new DungeonMaster(account);
             Intent intent = new Intent(this,HomeActivity.class);
-            intent.putExtra(DUNGEON_MASTER,dungeonMaster);
+            intent.putExtra(DUNGEON_MASTER, (Parcelable)dungeonMaster);
             this.startActivity(intent);
         } else {
             Toast.makeText(this, getString(R.string.login_failed), Toast.LENGTH_LONG).show();

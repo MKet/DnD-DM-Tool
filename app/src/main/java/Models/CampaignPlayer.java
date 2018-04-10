@@ -1,8 +1,10 @@
 package Models;
 
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +15,7 @@ import DndUtil.DndUtil;
  * Created by maxhe on 15-3-2018.
  */
 
-public class CampaignPlayer implements Parcelable{
+public class CampaignPlayer implements Parcelable, Serializable{
     private String id;
     private String name;
     private int level;
@@ -42,13 +44,6 @@ public class CampaignPlayer implements Parcelable{
         abilities.put(Abilities.Dexterity, dexterity);
 
 
-    }
-
-
-    protected CampaignPlayer(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-        level = in.readInt();
     }
 
     public static final Creator<CampaignPlayer> CREATOR = new Creator<CampaignPlayer>() {
@@ -115,6 +110,24 @@ public class CampaignPlayer implements Parcelable{
         dest.writeString(name);
         dest.writeInt(level);
 
+        dest.writeInt(abilities.size());
+        for(Map.Entry<Abilities, PlayerAbility> entry : abilities.entrySet()){
+            dest.writeInt(entry.getKey().ordinal());
+            entry.getValue().writeToParcel(dest, flags);
+        }
+    }
+
+    protected CampaignPlayer(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        level = in.readInt();
+
+        int size = in.readInt();
+        for(int i = 0; i < size; i++){
+            Abilities key = Abilities.values()[in.readInt()];
+            PlayerAbility value = PlayerAbility.CREATOR.createFromParcel(in);
+            abilities.put(key,value);
+        }
     }
 
     public int calculateSkillValue(Skills skill) {

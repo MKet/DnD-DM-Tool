@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity{
         Button btnNewCampaign = findViewById(R.id.btnNewCampaign);
         final Intent intent = new Intent(this,NewCampaignActivity.class);
         btnNewCampaign.setOnClickListener(v -> {
-            intent.putExtra(DUNGEONMASTER,dungeonMaster);
+            intent.putExtra(DUNGEONMASTER, (Parcelable) dungeonMaster);
             startActivity(intent);
         });
         setSpinnerCampaign();
@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity{
         Button btnNotes = findViewById(R.id.btnSeeNotes);
         Intent intentNotes = new Intent(this,NoteActivity.class);
         btnNotes.setOnClickListener(v -> {
-            intentNotes.putExtra(NOTES,campaign);
+            intentNotes.putExtra(NOTES, (Parcelable)campaign);
             startActivity(intentNotes);
         });
 
@@ -136,8 +136,8 @@ public class HomeActivity extends AppCompatActivity{
 
     private void goToPlayerStats(CampaignPlayer player, int position){
         Intent intent = new Intent(this,PlayerActivity.class);
-        intent.putExtra(CAMPAIGNPLAYER, player);
-        intent.putExtra(CAMPAIGN, campaign);
+        intent.putExtra(CAMPAIGNPLAYER, (Parcelable) player);
+        intent.putExtra(CAMPAIGN, (Parcelable) campaign);
         intent.putExtra(POSITION,position);
 
 
