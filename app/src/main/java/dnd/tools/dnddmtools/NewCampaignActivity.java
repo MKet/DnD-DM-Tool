@@ -3,7 +3,6 @@ package dnd.tools.dnddmtools;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,13 +15,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import DndUtil.DndUtil;
-import Models.Ability;
-import Models.AbilityValueWrapper;
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.DungeonMaster;
-import Models.Skill;
 
 
 /**

@@ -136,9 +136,8 @@ public class HomeActivity extends AppCompatActivity{
 
     private void goToPlayerStats(CampaignPlayer player, int position){
         Intent intent = new Intent(this,PlayerActivity.class);
-        intent.putExtra(CAMPAIGNPLAYER,player);
+        intent.putExtra(CAMPAIGNPLAYER, player);
         intent.putExtra(CAMPAIGN, campaign);
-        intent.putExtra(SKILLSLIST,(ArrayList<Skill>) player.getSkillList());
         intent.putExtra(POSITION,position);
 
 

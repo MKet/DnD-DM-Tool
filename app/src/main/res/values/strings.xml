@@ -26,7 +26,7 @@
     <string name="exp_result">Experience result</string>
     <string name="experience_message">This combat got each player %d experience</string>
     <string name="login_failed">Login failed</string>
-    <string name="ability">Ability:</string>
+    <string name="abilities">Ability:</string>
     <string name="save">Save</string>
     <string name="textview">TextView</string>
     <string name="proficiency">Proficiency</string>
