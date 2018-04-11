@@ -55,7 +55,6 @@ public class PlayerActivity extends AppCompatActivity {
         abilityScore = findViewById(R.id.AbilityScore);
 
         skill = new Skills[5];
-
         skillView = new TextView[5];
         skillView[0] = findViewById(R.id.txtSkill1);
         skillView[1] = findViewById(R.id.txtSkill2);
@@ -140,13 +139,13 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void setProficiency(Skills skill, boolean proficient) {
-        Skill playerSkill = player.getAbilities().get(skill.getAbilities()).getSkills().get(skill);
+        Skill playerSkill = player.getAbilities().get(skill.getAbilities().name()).getSkills().get(skill.name());
         playerSkill.setProficienct(proficient);
     }
 
     private void layoutAbilityStrength() {
-        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Strength);
-        abilityScore.setText(String.format(Locale.US, "%d" , playerAbility.getValue()));;
+        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Strength.name());
+        abilityScore.setText(String.format(Locale.US, "%d" , playerAbility.getValue()));
 
         setSkillView(Skills.Athletics, playerAbility, 0);
 
@@ -160,7 +159,7 @@ public class PlayerActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void layoutAbilityDexterity(){
-        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Dexterity);
+        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Dexterity.name());
         abilityScore.setText(Integer.toString(playerAbility.getValue()));
 
         setSkillView(Skills.Acrobatics, playerAbility, 0);
@@ -176,7 +175,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void layoutAbilityIntelligence(){
-        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Intelligence);
+        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Intelligence.name());
         abilityScore.setText(String.format(Locale.US, "%d" , playerAbility.getValue()));
 
         setSkillView(Skills.Arcana, playerAbility, 0);
@@ -187,7 +186,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void layoutAbilityWisdom(){
-        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Wisdom);
+        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Wisdom.name());
         abilityScore.setText(String.format(Locale.US, "%d" , playerAbility.getValue()));
         setSkillView(Skills.AnimalHandling, playerAbility, 0);
         setSkillView(Skills.Insight, playerAbility, 1);
@@ -197,7 +196,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void layoutAbilityCharisma(){
-        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Charisma);
+        PlayerAbility playerAbility = player.getAbilities().get(Abilities.Charisma.name());
         abilityScore.setText(String.format(Locale.US, "%d" , playerAbility.getValue()));
 
         setSkillView(Skills.Deception, playerAbility, 0);
@@ -211,10 +210,10 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void setSkillView(Skills skills, PlayerAbility playerAbility, int index) {
-        Skill playerSkill = playerAbility.getSkills().get(skills);
+        Skill playerSkill = playerAbility.getSkills().get(skills.name());
 
         txt[index].setText(playerSkill.getName().name());
-        skillView[index].setText(player.calculateSkillValue(skills));
+        skillView[index].setText(String.format(Locale.US, "%s" ,player.calculateSkillValue(skills)));
         checkBox[index].setChecked(playerSkill.isProficienct());
         skill[index] = skills;
     }

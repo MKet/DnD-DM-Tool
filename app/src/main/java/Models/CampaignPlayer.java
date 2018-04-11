@@ -19,31 +19,27 @@ public class CampaignPlayer implements Parcelable, Serializable{
     private String id;
     private String name;
     private int level;
-    private Map<Abilities, PlayerAbility> abilities;
+    private Map<String, PlayerAbility> abilities = new HashMap<>(5);
 
     public CampaignPlayer(){
-
-    }
-
-    public CampaignPlayer(String name, String id){
-        setName(name);
-        this.id = id;
-        setLevel(1);
-
-        abilities = new HashMap<>(5);
         PlayerAbility strength = new PlayerAbility(Abilities.Strength, 10);
         PlayerAbility charisma = new PlayerAbility(Abilities.Charisma, 10);
         PlayerAbility intelligence = new PlayerAbility(Abilities.Intelligence, 10);
         PlayerAbility wisdom = new PlayerAbility(Abilities.Wisdom, 10);
         PlayerAbility dexterity = new PlayerAbility(Abilities.Dexterity, 10);
 
-        abilities.put(Abilities.Strength ,strength);
-        abilities.put(Abilities.Charisma, charisma);
-        abilities.put(Abilities.Intelligence, intelligence);
-        abilities.put(Abilities.Wisdom, wisdom);
-        abilities.put(Abilities.Dexterity, dexterity);
+        abilities.put(Abilities.Strength.name() ,strength);
+        abilities.put(Abilities.Charisma.name(), charisma);
+        abilities.put(Abilities.Intelligence.name(), intelligence);
+        abilities.put(Abilities.Wisdom.name(), wisdom);
+        abilities.put(Abilities.Dexterity.name(), dexterity);
+    }
 
-
+    public CampaignPlayer(String name, String id){
+        this();
+        setName(name);
+        this.id = id;
+        setLevel(1);
     }
 
     public static final Creator<CampaignPlayer> CREATOR = new Creator<CampaignPlayer>() {
@@ -82,11 +78,11 @@ public class CampaignPlayer implements Parcelable, Serializable{
         this.level = level;
     }
 
-    public Map<Abilities, PlayerAbility> getAbilities() {
+    public Map<String, PlayerAbility> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(Map<Abilities, PlayerAbility> abilities) {
+    public void setAbilities(Map<String, PlayerAbility> abilities) {
         this.abilities = abilities;
     }
 
@@ -111,8 +107,8 @@ public class CampaignPlayer implements Parcelable, Serializable{
         dest.writeInt(level);
 
         dest.writeInt(abilities.size());
-        for(Map.Entry<Abilities, PlayerAbility> entry : abilities.entrySet()){
-            dest.writeInt(entry.getKey().ordinal());
+        for(Map.Entry<String, PlayerAbility> entry : abilities.entrySet()){
+            dest.writeString(entry.getKey());
             entry.getValue().writeToParcel(dest, flags);
         }
     }
@@ -124,17 +120,17 @@ public class CampaignPlayer implements Parcelable, Serializable{
 
         int size = in.readInt();
         for(int i = 0; i < size; i++){
-            Abilities key = Abilities.values()[in.readInt()];
+            String key = in.readString();
             PlayerAbility value = PlayerAbility.CREATOR.createFromParcel(in);
             abilities.put(key,value);
         }
     }
 
     public int calculateSkillValue(Skills skill) {
-        PlayerAbility ability = abilities.get(skill.getAbilities());
+        PlayerAbility ability = abilities.get(skill.getAbilities().name());
         int value = ability.getValue();
 
-        Skill playerSkill = ability.getSkills().get(skill);
+        Skill playerSkill = ability.getSkills().get(skill.name());
 
         if(playerSkill.isProficienct()) {
             int proficiency = DndUtil.calculateProficiency(getLevel());

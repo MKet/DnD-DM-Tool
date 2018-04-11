@@ -16,7 +16,6 @@ public enum Abilities{
     Charisma("Charisma"),
     Constitution("Constitution");
 
-
     private String name;
 
     Abilities(String name){
@@ -28,38 +27,38 @@ public enum Abilities{
         return name;
     }
 
-    public Map<Skills, Skill> generateSkills() {
-        Map<Skills, Skill> skills = new HashMap<>();
+    public HashMap<String, Skill> generateSkills() {
+        HashMap<String, Skill> skills = new HashMap<>();
         switch (this) {
             case Strength:
-                skills.put(Skills.Athletics, new Skill(Skills.Athletics));
+                skills.put(Skills.Athletics.name(), new Skill(Skills.Athletics));
                 break;
             case Dexterity:
-                skills.put(Skills.Acrobatics, new Skill(Skills.Acrobatics));
-                skills.put(Skills.SleightOfHand, new Skill(Skills.SleightOfHand));
-                skills.put(Skills.Stealth, new Skill(Skills.Stealth));
+                skills.put(Skills.Acrobatics.name(), new Skill(Skills.Acrobatics));
+                skills.put(Skills.SleightOfHand.name(), new Skill(Skills.SleightOfHand));
+                skills.put(Skills.Stealth.name(), new Skill(Skills.Stealth));
                 break;
             case Constitution:
                 break;
             case Wisdom:
-                skills.put(Skills.AnimalHandling, new Skill(Skills.AnimalHandling));
-                skills.put(Skills.Insight, new Skill(Skills.Insight));
-                skills.put(Skills.Medicine, new Skill(Skills.Medicine));
-                skills.put(Skills.Perception, new Skill(Skills.Perception));
-                skills.put(Skills.Survival, new Skill(Skills.Survival));
+                skills.put(Skills.AnimalHandling.name(), new Skill(Skills.AnimalHandling));
+                skills.put(Skills.Insight.name(), new Skill(Skills.Insight));
+                skills.put(Skills.Medicine.name(), new Skill(Skills.Medicine));
+                skills.put(Skills.Perception.name(), new Skill(Skills.Perception));
+                skills.put(Skills.Survival.name(), new Skill(Skills.Survival));
                 break;
             case Intelligence:
-                skills.put(Skills.Arcana, new Skill(Skills.Arcana));
-                skills.put(Skills.History, new Skill(Skills.History));
-                skills.put(Skills.Investigation, new Skill(Skills.Investigation));
-                skills.put(Skills.Nature, new Skill(Skills.Nature));
-                skills.put(Skills.Religion, new Skill(Skills.Religion));
+                skills.put(Skills.Arcana.name(), new Skill(Skills.Arcana));
+                skills.put(Skills.History.name(), new Skill(Skills.History));
+                skills.put(Skills.Investigation.name(), new Skill(Skills.Investigation));
+                skills.put(Skills.Nature.name(), new Skill(Skills.Nature));
+                skills.put(Skills.Religion.name(), new Skill(Skills.Religion));
                 break;
             case Charisma:
-                skills.put(Skills.Persuasion, new Skill(Skills.Persuasion));
-                skills.put(Skills.Intimidation, new Skill(Skills.Intimidation));
-                skills.put(Skills.Deception, new Skill(Skills.Deception));
-                skills.put(Skills.Performance, new Skill(Skills.Performance));
+                skills.put(Skills.Persuasion.name(), new Skill(Skills.Persuasion));
+                skills.put(Skills.Intimidation.name(), new Skill(Skills.Intimidation));
+                skills.put(Skills.Deception.name(), new Skill(Skills.Deception));
+                skills.put(Skills.Performance.name(), new Skill(Skills.Performance));
                 break;
 
         }

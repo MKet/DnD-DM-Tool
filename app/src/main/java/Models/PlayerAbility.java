@@ -4,22 +4,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by maxhe on 5-4-2018.
  */
-
 public class PlayerAbility implements Parcelable, Serializable {
     private Abilities abilities;
     private Integer value;
-    private Map<Skills, Skill> skills;
+    private HashMap<String, Skill> skills;
 
-    public Map<Skills, Skill> getSkills() {
+    public HashMap<String, Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Map<Skills, Skill> skills) {
+    public void setSkills(HashMap<String, Skill> skills) {
         this.skills = skills;
     }
 
@@ -37,6 +37,7 @@ public class PlayerAbility implements Parcelable, Serializable {
 
     public void setAbilities(Abilities abilities) {
         this.abilities = abilities;
+        skills = abilities.generateSkills();
     }
 
     public void setValue(Integer value) {
@@ -44,12 +45,11 @@ public class PlayerAbility implements Parcelable, Serializable {
     }
 
     public PlayerAbility(){
-        skills = abilities.generateSkills();
     }
 
     public PlayerAbility(Abilities abilities, Integer value) {
-        this();
         this.abilities = abilities;
+        this.skills = abilities.generateSkills();
         this.value = value;
     }
 
@@ -77,8 +77,8 @@ public class PlayerAbility implements Parcelable, Serializable {
         }
 
         dest.writeInt(skills.size());
-        for(Map.Entry<Skills, Skill> entry : skills.entrySet()){
-            dest.writeInt(entry.getKey().ordinal());
+        for(Map.Entry<String, Skill> entry : skills.entrySet()){
+            dest.writeString(entry.getKey());
             entry.getValue().writeToParcel(dest, flags);
         }
     }
@@ -92,9 +92,10 @@ public class PlayerAbility implements Parcelable, Serializable {
             value = in.readInt();
         }
 
+        skills = new HashMap<>();
         int size = in.readInt();
         for(int i = 0; i < size; i++){
-            Skills key = Skills.values()[in.readInt()];
+            String key = in.readString();
             Skill value = Skill.CREATOR.createFromParcel(in);
             skills.put(key,value);
         }

@@ -15,7 +15,7 @@ public class Campaign implements Parcelable, Serializable{
 
     private String id;
     private String name;
-    private List<CampaignPlayer> players;
+    private List<CampaignPlayer> players = new ArrayList<>();
     private String note;
     private String dungeonMaster;
 

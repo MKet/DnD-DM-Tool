@@ -27,7 +27,6 @@ import Models.DungeonMaster;
 
 public class NewCampaignActivity extends AppCompatActivity {
 
-    private List<CampaignPlayer> players = new ArrayList<>();
     private ListView lstPlayers;
     private EditText txtPlayername;
     private Campaign campaign;
@@ -38,6 +37,7 @@ public class NewCampaignActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        campaign = new Campaign();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_campaign_activity);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -55,9 +55,6 @@ public class NewCampaignActivity extends AppCompatActivity {
     }
 
     private void addCampaign(){
-        campaign = new Campaign();
-        campaign.setPlayers(players);
-
         Intent intent = getIntent();
         DungeonMaster dungeonMaster = intent.getParcelableExtra(HomeActivity.DUNGEONMASTER);
 
@@ -71,18 +68,20 @@ public class NewCampaignActivity extends AppCompatActivity {
         Intent intentBack = new Intent(this,HomeActivity.class);
         intent.putExtra(DUNGEON_MASTER, (Parcelable)dungeonMaster);
         startActivity(intentBack);
+        campaign = new Campaign();
+        setListView();
     }
 
     private void addPlayer(){
         CampaignPlayer player = new CampaignPlayer(txtPlayername.getText().toString(), reference.push().getKey());
 
-        players.add(player);
+        campaign.getPlayers().add(player);
         adapter.notifyDataSetChanged();
         txtPlayername.setText("");
     }
 
     private void setListView(){
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,players);
+        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, campaign.getPlayers());
         lstPlayers.setAdapter(adapter);
     }
 }
