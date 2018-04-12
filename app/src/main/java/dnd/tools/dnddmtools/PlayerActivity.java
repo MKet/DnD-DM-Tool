@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -107,6 +109,37 @@ public class PlayerActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+        changeLayout(Abilities.values()[position]);
+
+        abilityScore.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String text = s.toString();
+
+                if (!text.isEmpty()) {
+                    int textParse = Integer.parseInt(text);
+                    for (int i = 0; i < 5; i++) {
+                        if (skill[i] == null)
+                            break;
+                        Abilities abilities = skill[i].getAbilities();
+                        PlayerAbility playerAbility = player.getAbilities().get(abilities.name());
+                        playerAbility.setValue(textParse);
+
+                        skillView[i].setText(String.format(Locale.US, "%s", player.calculateSkillValue(skill[i])));
+                    }
+                }
             }
         });
     }
