@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity{
     public static final String DUNGEONMASTER = "";
     public static final String POSITION = "Position";
     public static final String NOTES = "Note";
+    public static final int NOTE_RESULT = 20;
     private ListView lstViewPlayers;
     private Spinner spinnerCampaign;
     private ArrayAdapter<CampaignPlayer> campaignPlayerArrayAdapter;
@@ -49,6 +50,11 @@ public class HomeActivity extends AppCompatActivity{
     public static final String SKILLSLIST = "LIST";
     private Campaign campaign;
 
+
+    private Button combatButton;
+    private Button btnNewCampaign;
+    private Button btnNotes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +62,8 @@ public class HomeActivity extends AppCompatActivity{
 
         Intent intentGetAccount = getIntent();
         dungeonMaster = intentGetAccount.getParcelableExtra(MainActivity.DUNGEON_MASTER);
-        Button btnNewCampaign = findViewById(R.id.btnNewCampaign);
+
+        btnNewCampaign = findViewById(R.id.btnNewCampaign);
         final Intent intent = new Intent(this,NewCampaignActivity.class);
         btnNewCampaign.setOnClickListener(v -> {
             intent.putExtra(DUNGEONMASTER, (Parcelable) dungeonMaster);
@@ -64,7 +71,8 @@ public class HomeActivity extends AppCompatActivity{
         });
         setSpinnerCampaign();
 
-        Button btnNotes = findViewById(R.id.btnSeeNotes);
+
+        btnNotes = findViewById(R.id.btnSeeNotes);
         Intent intentNotes = new Intent(this,NoteActivity.class);
         btnNotes.setOnClickListener(v -> {
             intentNotes.putExtra(NOTES, (Parcelable)campaign);
@@ -82,13 +90,23 @@ public class HomeActivity extends AppCompatActivity{
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        Button combatButton = findViewById(R.id.combatTracker);
-
+        combatButton = findViewById(R.id.combatTracker);
         combatButton.setOnClickListener((v) -> {
             Intent combatIntent = new Intent(this, InitiativeActivity.class);
             combatIntent.putParcelableArrayListExtra("campaignPlayers", (ArrayList<CampaignPlayer>) campaignPlayers);
             startActivity(combatIntent);
         });
+
+        CampaignButtonsEnabled(campaigns != null && !campaigns.isEmpty());
+    }
+
+    /**
+     * disable buttons that require canpaigns to be loaded
+     * @param enabled whether any campaigns are loaded in
+     */
+    private void CampaignButtonsEnabled(boolean enabled) {
+        combatButton.setEnabled(enabled);
+        btnNotes.setEnabled(enabled);
     }
 
     private void setSpinnerCampaign(){
@@ -109,6 +127,7 @@ public class HomeActivity extends AppCompatActivity{
                     campaigns.add(campaign);
                 }
                 campaignArrayAdapter.notifyDataSetChanged();
+                CampaignButtonsEnabled(campaigns != null && !campaigns.isEmpty());
             }
 
             @Override public void onCancelled(DatabaseError databaseError) {}
