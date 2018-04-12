@@ -14,13 +14,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -29,18 +26,19 @@ import java.util.List;
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.DungeonMaster;
-import Models.Skill;
 
 /**
  * Created by maxhe on 15-3-2018.
  */
 
-public class HomeActivity extends AppCompatActivity{
+public class HomeActivity extends AppCompatActivity {
 
     public static final String DUNGEONMASTER = "";
     public static final String POSITION = "Position";
     public static final String NOTES = "Note";
     public static final int NOTE_RESULT = 20;
+    public static final String CAMPAIGN = "Campaign";
+    public static final String CAMPAIGNPLAYER = "";
     private ListView lstViewPlayers;
     private Spinner spinnerCampaign;
     private ArrayAdapter<CampaignPlayer> campaignPlayerArrayAdapter;
@@ -48,9 +46,6 @@ public class HomeActivity extends AppCompatActivity{
     private List<CampaignPlayer> campaignPlayers;
     private List<Campaign> campaigns;
     private DungeonMaster dungeonMaster;
-    public static final String CAMPAIGN = "Campaign";
-    public static final String CAMPAIGNPLAYER = "";
-    public static final String SKILLSLIST = "LIST";
     private Campaign campaign;
     private DatabaseReference reference;
 
@@ -84,9 +79,9 @@ public class HomeActivity extends AppCompatActivity{
         });
 
         lstViewPlayers = findViewById(R.id.lstPlayers);
-        lstViewPlayers.setCacheColorHint(Color.rgb(226,0,0));
+        lstViewPlayers.setCacheColorHint(Color.rgb(226, 0, 0));
         TextView lstPlayersTitle = new TextView(getBaseContext());
-        lstPlayersTitle.setTextColor(Color.rgb(226,0,0));
+        lstPlayersTitle.setTextColor(Color.rgb(226, 0, 0));
         lstPlayersTitle.setText("Players:");
         lstPlayersTitle.setTextSize(20);
         lstViewPlayers.addHeaderView(lstPlayersTitle);
@@ -151,7 +146,7 @@ public class HomeActivity extends AppCompatActivity{
     private void setLstViewPlayers(Campaign campaign) {
         this.campaign = campaign;
         campaignPlayers = new ArrayList<>();
-        campaignPlayerArrayAdapter = new ArrayAdapter<>(this,R.layout.list_item,campaignPlayers);
+        campaignPlayerArrayAdapter = new ArrayAdapter<>(this, R.layout.list_item, campaignPlayers);
         lstViewPlayers.setAdapter(campaignPlayerArrayAdapter);
 
         campaignPlayers.addAll(campaign.getPlayers());

@@ -13,9 +13,6 @@ import android.widget.ListView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.DungeonMaster;
@@ -27,13 +24,13 @@ import Models.DungeonMaster;
 
 public class NewCampaignActivity extends AppCompatActivity {
 
+    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     private ListView lstPlayers;
     private EditText txtPlayername;
     private Campaign campaign;
     private EditText txtCampaignname;
     private ArrayAdapter<CampaignPlayer> adapter;
     private String DUNGEON_MASTER = "";
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +77,8 @@ public class NewCampaignActivity extends AppCompatActivity {
         txtPlayername.setText("");
     }
 
-    private void setListView(){
-        adapter = new ArrayAdapter<>(this,R.layout.list_item, campaign.getPlayers());
+    private void setListView() {
+        adapter = new ArrayAdapter<>(this, R.layout.list_item, campaign.getPlayers());
         lstPlayers.setAdapter(adapter);
     }
 }
