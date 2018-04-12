@@ -13,9 +13,6 @@ import android.widget.ListView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.DungeonMaster;
@@ -27,16 +24,16 @@ import Models.DungeonMaster;
 
 public class NewCampaignActivity extends AppCompatActivity {
 
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     private ListView lstPlayers;
     private EditText txtPlayername;
     private Campaign campaign;
     private EditText txtCampaignname;
     private ArrayAdapter<CampaignPlayer> adapter;
     private String DUNGEON_MASTER = "";
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         campaign = new Campaign();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_campaign_activity);
@@ -54,7 +51,7 @@ public class NewCampaignActivity extends AppCompatActivity {
         btnAddCampaign.setOnClickListener(v -> addCampaign());
     }
 
-    private void addCampaign(){
+    private void addCampaign() {
         Intent intent = getIntent();
         DungeonMaster dungeonMaster = intent.getParcelableExtra(HomeActivity.DUNGEONMASTER);
 
@@ -65,14 +62,14 @@ public class NewCampaignActivity extends AppCompatActivity {
         reference.child("Campaign").child(key).child("dungeonMaster").setValue(campaign.getDungeonMaster());
         reference.child("Campaign").child(key).child("name").setValue(campaign.getName());
         reference.child("Campaign").child(key).child("players").setValue(campaign.getPlayers());
-        Intent intentBack = new Intent(this,HomeActivity.class);
-        intent.putExtra(DUNGEON_MASTER, (Parcelable)dungeonMaster);
+        Intent intentBack = new Intent(this, HomeActivity.class);
+        intent.putExtra(DUNGEON_MASTER, (Parcelable) dungeonMaster);
         startActivity(intentBack);
         campaign = new Campaign();
         setListView();
     }
 
-    private void addPlayer(){
+    private void addPlayer() {
         CampaignPlayer player = new CampaignPlayer(txtPlayername.getText().toString(), reference.push().getKey());
 
         campaign.getPlayers().add(player);
@@ -80,8 +77,8 @@ public class NewCampaignActivity extends AppCompatActivity {
         txtPlayername.setText("");
     }
 
-    private void setListView(){
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, campaign.getPlayers());
+    private void setListView() {
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, campaign.getPlayers());
         lstPlayers.setAdapter(adapter);
     }
 }

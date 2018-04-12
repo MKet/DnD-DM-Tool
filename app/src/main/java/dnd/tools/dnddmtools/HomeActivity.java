@@ -12,13 +12,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -27,18 +24,19 @@ import java.util.List;
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.DungeonMaster;
-import Models.Skill;
 
 /**
  * Created by maxhe on 15-3-2018.
  */
 
-public class HomeActivity extends AppCompatActivity{
+public class HomeActivity extends AppCompatActivity {
 
     public static final String DUNGEONMASTER = "";
     public static final String POSITION = "Position";
     public static final String NOTES = "Note";
     public static final int NOTE_RESULT = 20;
+    public static final String CAMPAIGN = "Campaign";
+    public static final String CAMPAIGNPLAYER = "";
     private ListView lstViewPlayers;
     private Spinner spinnerCampaign;
     private ArrayAdapter<CampaignPlayer> campaignPlayerArrayAdapter;
@@ -46,9 +44,6 @@ public class HomeActivity extends AppCompatActivity{
     private List<CampaignPlayer> campaignPlayers;
     private List<Campaign> campaigns;
     private DungeonMaster dungeonMaster;
-    public static final String CAMPAIGN = "Campaign";
-    public static final String CAMPAIGNPLAYER = "";
-    public static final String SKILLSLIST = "LIST";
     private Campaign campaign;
     private DatabaseReference reference;
 
@@ -65,7 +60,7 @@ public class HomeActivity extends AppCompatActivity{
         dungeonMaster = intentGetAccount.getParcelableExtra(MainActivity.DUNGEON_MASTER);
 
         btnNewCampaign = findViewById(R.id.btnNewCampaign);
-        final Intent intent = new Intent(this,NewCampaignActivity.class);
+        final Intent intent = new Intent(this, NewCampaignActivity.class);
         btnNewCampaign.setOnClickListener(v -> {
             intent.putExtra(DUNGEONMASTER, (Parcelable) dungeonMaster);
             startActivity(intent);
@@ -74,9 +69,9 @@ public class HomeActivity extends AppCompatActivity{
 
 
         btnNotes = findViewById(R.id.btnSeeNotes);
-        Intent intentNotes = new Intent(this,NoteActivity.class);
+        Intent intentNotes = new Intent(this, NoteActivity.class);
         btnNotes.setOnClickListener(v -> {
-            intentNotes.putExtra(NOTES, (Parcelable)campaign);
+            intentNotes.putExtra(NOTES, (Parcelable) campaign);
             startActivity(intentNotes);
             startActivityForResult(intentNotes, NOTE_RESULT);
         });
@@ -89,7 +84,8 @@ public class HomeActivity extends AppCompatActivity{
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         combatButton = findViewById(R.id.combatTracker);
@@ -104,6 +100,7 @@ public class HomeActivity extends AppCompatActivity{
 
     /**
      * disable buttons that require canpaigns to be loaded
+     *
      * @param enabled whether any campaigns are loaded in
      */
     private void CampaignButtonsEnabled(boolean enabled) {
@@ -111,9 +108,9 @@ public class HomeActivity extends AppCompatActivity{
         btnNotes.setEnabled(enabled);
     }
 
-    private void setSpinnerCampaign(){
+    private void setSpinnerCampaign() {
         campaigns = new ArrayList<>();
-        campaignArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,campaigns);
+        campaignArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, campaigns);
         spinnerCampaign = findViewById(R.id.spinner);
         spinnerCampaign.setAdapter(campaignArrayAdapter);
 
@@ -122,7 +119,7 @@ public class HomeActivity extends AppCompatActivity{
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Campaign campaign = snapshot.getValue(Campaign.class);
                     String id = snapshot.getKey();
                     campaign.setId(id);
@@ -132,24 +129,26 @@ public class HomeActivity extends AppCompatActivity{
                 CampaignButtonsEnabled(campaigns != null && !campaigns.isEmpty());
             }
 
-            @Override public void onCancelled(DatabaseError databaseError) {}
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
         });
     }
 
-    private void setLstViewPlayers(Campaign campaign){
+    private void setLstViewPlayers(Campaign campaign) {
         this.campaign = campaign;
         campaignPlayers = new ArrayList<>();
-        campaignPlayerArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,campaignPlayers);
+        campaignPlayerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, campaignPlayers);
         lstViewPlayers.setAdapter(campaignPlayerArrayAdapter);
 
         campaignPlayers.addAll(campaign.getPlayers());
         campaignPlayerArrayAdapter.notifyDataSetChanged();
         lstViewPlayers.setOnItemClickListener((parent, view, position, id) -> {
-            goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position],position);
+            goToPlayerStats((CampaignPlayer) campaignPlayers.toArray()[position], position);
         });
     }
 
-    private void goToPlayerStats(CampaignPlayer player, int position){
+    private void goToPlayerStats(CampaignPlayer player, int position) {
         Intent intent = new Intent(this, PlayerActivity.class);
         intent.putExtra(CAMPAIGNPLAYER, (Parcelable) player);
         intent.putExtra(CAMPAIGN, (Parcelable) campaign);
@@ -161,8 +160,8 @@ public class HomeActivity extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
-            case (NOTE_RESULT) : {
+        switch (requestCode) {
+            case (NOTE_RESULT): {
                 if (resultCode == Activity.RESULT_OK) {
                     String note = data.getStringExtra(NoteActivity.NOTE_RESULT_KEY);
                     campaign.setNote(note);

@@ -1,6 +1,5 @@
 package dnd.tools.dnddmtools;
 
-import android.arch.lifecycle.LifecycleObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -144,7 +143,7 @@ public class InitiativeActivity extends AppCompatActivity {
         return totalExperience / playerAmount;
     }
 
-    private  int calculateExperience(Iterable<CreatureTurnItem> CRList) {
+    private int calculateExperience(Iterable<CreatureTurnItem> CRList) {
         return calculateExperience(CRList, 1);
     }
 

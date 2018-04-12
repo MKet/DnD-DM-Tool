@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import Models.Campaign;
 
@@ -27,7 +24,7 @@ public class NoteActivity extends AppCompatActivity {
     private EditText editText;
 
     @Override
-    protected void onCreate(Bundle savedInstance){
+    protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_notes);
 
@@ -50,7 +47,7 @@ public class NoteActivity extends AppCompatActivity {
 
     }
 
-    private void saveNote(){
+    private void saveNote() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Campaign").child(campaign.getId());
         reference.child("note").removeValue();
         reference.child("note").setValue(editText.getText().toString());

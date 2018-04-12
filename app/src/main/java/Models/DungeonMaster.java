@@ -15,36 +15,6 @@ import java.util.List;
 
 public class DungeonMaster implements Parcelable, Serializable {
 
-    private List<Campaign> campaigns;
-    private String id;
-    private String name;
-
-    public DungeonMaster(GoogleSignInAccount account){
-        id = account.getId();
-        name = account.getDisplayName();
-        campaigns = new ArrayList<>();
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public DungeonMaster(){
-
-    }
-
-    public String getId() {
-        return id;
-    }
-
     public static final Creator<DungeonMaster> CREATOR = new Creator<DungeonMaster>() {
         @Override
         public DungeonMaster createFromParcel(Parcel in) {
@@ -56,6 +26,46 @@ public class DungeonMaster implements Parcelable, Serializable {
             return new DungeonMaster[size];
         }
     };
+    private List<Campaign> campaigns;
+    private String id;
+    private String name;
+
+    public DungeonMaster(GoogleSignInAccount account) {
+        id = account.getId();
+        name = account.getDisplayName();
+        campaigns = new ArrayList<>();
+    }
+
+    public DungeonMaster() {
+
+    }
+
+    protected DungeonMaster(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+
+        int size = in.readInt();
+        campaigns = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            Campaign.CREATOR.createFromParcel(in);
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public List<Campaign> getCampaigns() {
         return campaigns;
@@ -66,7 +76,7 @@ public class DungeonMaster implements Parcelable, Serializable {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 
@@ -75,24 +85,13 @@ public class DungeonMaster implements Parcelable, Serializable {
         return 0;
     }
 
-    protected DungeonMaster(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-
-        int size = in.readInt();
-        campaigns = new ArrayList<>();
-        for(int i = 0; i< size; i++) {
-            Campaign.CREATOR.createFromParcel(in);
-        }
-    }
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(name);
 
         dest.writeInt(campaigns.size());
-        for(Campaign campaign : campaigns) {
+        for (Campaign campaign : campaigns) {
             campaign.writeToParcel(dest, flags);
         }
     }

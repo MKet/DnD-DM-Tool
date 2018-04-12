@@ -5,26 +5,31 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
-import DndUtil.DndUtil;
-
 /**
  * Created by maxhe on 15-3-2018.
  */
 
 public class Skill implements Parcelable, Serializable {
+    public static final Creator<Skill> CREATOR = new Creator<Skill>() {
+        @Override
+        public Skill createFromParcel(Parcel in) {
+            return new Skill(in);
+        }
+
+        @Override
+        public Skill[] newArray(int size) {
+            return new Skill[size];
+        }
+    };
     private Skills name;
     private boolean proficienct = false;
-
-    public static Creator<Skill> getCREATOR() {
-        return CREATOR;
-    }
 
     protected Skill(Parcel in) {
         name = Skills.valueOf(in.readString());
         proficienct = in.readByte() != 0;
     }
 
-    public Skill(){
+    public Skill() {
 
     }
 
@@ -37,20 +42,8 @@ public class Skill implements Parcelable, Serializable {
         this.proficienct = proficienct;
     }
 
-    public static final Creator<Skill> CREATOR = new Creator<Skill>() {
-        @Override
-        public Skill createFromParcel(Parcel in) {
-            return new Skill(in);
-        }
-
-        @Override
-        public Skill[] newArray(int size) {
-            return new Skill[size];
-        }
-    };
-
-    public void setName(Skills name) {
-        this.name = name;
+    public static Creator<Skill> getCREATOR() {
+        return CREATOR;
     }
 
     public boolean isProficienct() {
@@ -63,6 +56,10 @@ public class Skill implements Parcelable, Serializable {
 
     public Skills getName() {
         return name;
+    }
+
+    public void setName(Skills name) {
+        this.name = name;
     }
 
     @Override

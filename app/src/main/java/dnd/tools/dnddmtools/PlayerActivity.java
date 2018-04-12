@@ -16,13 +16,12 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
 import java.util.Locale;
 
 import Models.Abilities;
-import Models.PlayerAbility;
 import Models.Campaign;
 import Models.CampaignPlayer;
+import Models.PlayerAbility;
 import Models.Skill;
 import Models.Skills;
 
@@ -47,7 +46,7 @@ public class PlayerActivity extends AppCompatActivity {
     private Skills[] skill;
 
     @Override
-    protected void onCreate(Bundle savedInstance){
+    protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_player);
 
@@ -82,16 +81,16 @@ public class PlayerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         player = intent.getParcelableExtra(HomeActivity.CAMPAIGNPLAYER);
         campaign = intent.getParcelableExtra(HomeActivity.CAMPAIGN);
-        position = intent.getIntExtra(HomeActivity.POSITION,-1);
+        position = intent.getIntExtra(HomeActivity.POSITION, -1);
 
         txtPlayerName.setText(player.getName());
         spinnerAbility = findViewById(R.id.spinnerAbility);
 
-        ArrayAdapter<Abilities> adapter = new ArrayAdapter<Abilities>(this,android.R.layout.simple_list_item_1, Abilities.values());
+        ArrayAdapter<Abilities> adapter = new ArrayAdapter<Abilities>(this, android.R.layout.simple_list_item_1, Abilities.values());
         adapter.notifyDataSetChanged();
         spinnerAbility.setAdapter(adapter);
 
-        for (int i= 0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             int index = i; // variables used in lambda must be effectively final
             checkBox[index].setOnCheckedChangeListener((cb, b) -> {
                 setProficiency(skill[index], b);
@@ -112,29 +111,38 @@ public class PlayerActivity extends AppCompatActivity {
         });
     }
 
-    private void changeLayout(Abilities abilities){
-        for(TextView txt: txt)
+    private void changeLayout(Abilities abilities) {
+        for (TextView txt : txt)
             txt.setVisibility(View.VISIBLE);
 
-        for(TextView txt: skillView)
+        for (TextView txt : skillView)
             txt.setVisibility(View.VISIBLE);
 
-        for(CheckBox cb: checkBox)
+        for (CheckBox cb : checkBox)
             cb.setVisibility(View.VISIBLE);
 
-        switch (abilities){
-            case Strength : layoutAbilityStrength(); break;
-            case Dexterity : layoutAbilityDexterity(); break;
-            case Intelligence : layoutAbilityIntelligence(); break;
-            case Wisdom : layoutAbilityWisdom(); break;
-            case Charisma : layoutAbilityCharisma(); break;
-            case Constitution:
-            {
-                for(TextView txt: txt)
+        switch (abilities) {
+            case Strength:
+                layoutAbilityStrength();
+                break;
+            case Dexterity:
+                layoutAbilityDexterity();
+                break;
+            case Intelligence:
+                layoutAbilityIntelligence();
+                break;
+            case Wisdom:
+                layoutAbilityWisdom();
+                break;
+            case Charisma:
+                layoutAbilityCharisma();
+                break;
+            case Constitution: {
+                for (TextView txt : txt)
                     txt.setVisibility(View.GONE);
-                for(TextView txt: skillView)
+                for (TextView txt : skillView)
                     txt.setVisibility(View.GONE);
-                for(CheckBox cb: checkBox)
+                for (CheckBox cb : checkBox)
                     cb.setVisibility(View.GONE);
                 break;
             }
@@ -148,38 +156,38 @@ public class PlayerActivity extends AppCompatActivity {
 
     private void layoutAbilityStrength() {
         PlayerAbility playerAbility = player.getAbilities().get(Abilities.Strength.name());
-        abilityScore.setText(String.format(Locale.US, "%d" , playerAbility.getValue()));
+        abilityScore.setText(String.format(Locale.US, "%d", playerAbility.getValue()));
 
         setSkillView(Skills.Athletics, playerAbility, 0);
 
-        for (int i= 1; i<5; i++)
+        for (int i = 1; i < 5; i++)
             txt[i].setVisibility(View.GONE);
-        for (int i= 1; i<5; i++)
+        for (int i = 1; i < 5; i++)
             skillView[i].setVisibility(View.GONE);
-        for (int i= 1; i<5; i++)
+        for (int i = 1; i < 5; i++)
             checkBox[i].setVisibility(View.GONE);
     }
 
     @SuppressLint("SetTextI18n")
-    private void layoutAbilityDexterity(){
+    private void layoutAbilityDexterity() {
         PlayerAbility playerAbility = player.getAbilities().get(Abilities.Dexterity.name());
         abilityScore.setText(Integer.toString(playerAbility.getValue()));
 
         setSkillView(Skills.Acrobatics, playerAbility, 0);
         setSkillView(Skills.SleightOfHand, playerAbility, 1);
-        setSkillView(Skills.Stealth, playerAbility,2);
+        setSkillView(Skills.Stealth, playerAbility, 2);
 
-        for (int i= 3; i<5; i++)
+        for (int i = 3; i < 5; i++)
             txt[i].setVisibility(View.GONE);
-        for (int i= 3; i<5; i++)
+        for (int i = 3; i < 5; i++)
             skillView[i].setVisibility(View.GONE);
-        for (int i= 3; i<5; i++)
+        for (int i = 3; i < 5; i++)
             checkBox[i].setVisibility(View.GONE);
     }
 
-    private void layoutAbilityIntelligence(){
+    private void layoutAbilityIntelligence() {
         PlayerAbility playerAbility = player.getAbilities().get(Abilities.Intelligence.name());
-        abilityScore.setText(String.format(Locale.US, "%d" , playerAbility.getValue()));
+        abilityScore.setText(String.format(Locale.US, "%d", playerAbility.getValue()));
 
         setSkillView(Skills.Arcana, playerAbility, 0);
         setSkillView(Skills.History, playerAbility, 1);
@@ -188,9 +196,9 @@ public class PlayerActivity extends AppCompatActivity {
         setSkillView(Skills.Religion, playerAbility, 4);
     }
 
-    private void layoutAbilityWisdom(){
+    private void layoutAbilityWisdom() {
         PlayerAbility playerAbility = player.getAbilities().get(Abilities.Wisdom.name());
-        abilityScore.setText(String.format(Locale.US, "%d" , playerAbility.getValue()));
+        abilityScore.setText(String.format(Locale.US, "%d", playerAbility.getValue()));
         setSkillView(Skills.AnimalHandling, playerAbility, 0);
         setSkillView(Skills.Insight, playerAbility, 1);
         setSkillView(Skills.Medicine, playerAbility, 2);
@@ -198,9 +206,9 @@ public class PlayerActivity extends AppCompatActivity {
         setSkillView(Skills.Survival, playerAbility, 4);
     }
 
-    private void layoutAbilityCharisma(){
+    private void layoutAbilityCharisma() {
         PlayerAbility playerAbility = player.getAbilities().get(Abilities.Charisma.name());
-        abilityScore.setText(String.format(Locale.US, "%d" , playerAbility.getValue()));
+        abilityScore.setText(String.format(Locale.US, "%d", playerAbility.getValue()));
 
         setSkillView(Skills.Deception, playerAbility, 0);
         setSkillView(Skills.Intimidation, playerAbility, 1);
@@ -216,12 +224,12 @@ public class PlayerActivity extends AppCompatActivity {
         Skill playerSkill = playerAbility.getSkills().get(skills.name());
 
         txt[index].setText(playerSkill.getName().name());
-        skillView[index].setText(String.format(Locale.US, "%s" ,player.calculateSkillValue(skills)));
+        skillView[index].setText(String.format(Locale.US, "%s", player.calculateSkillValue(skills)));
         checkBox[index].setChecked(playerSkill.isProficienct());
         skill[index] = skills;
     }
 
-    private void savePlayer(){
+    private void savePlayer() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         System.out.println(player.getId());
         DatabaseReference reference = firebaseDatabase.getReference("Campaign").child(campaign.getId()).child("players").child(String.valueOf(position));
@@ -229,7 +237,6 @@ public class PlayerActivity extends AppCompatActivity {
         reference.setValue(player);
 
     }
-
 
 
 }
