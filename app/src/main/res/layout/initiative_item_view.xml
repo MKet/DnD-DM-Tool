@@ -11,47 +11,54 @@
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginEnd="20dp"
+            android:textColor="@android:color/white"/>
 
         <TextView
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="@string/dash"/>
+            android:text="@string/dash"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:id="@+id/CR"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginEnd="20dp"
+            android:textColor="@android:color/white"/>
 
         <TextView
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="@string/dash"/>
+            android:text="@string/dash"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:id="@+id/Initiative"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginEnd="20dp"
+            android:textColor="@android:color/white"/>
 
         <TextView
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="@string/dash"/>
+            android:text="@string/dash"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:id="@+id/Dexterity"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginEnd="20dp"
+            android:textColor="@android:color/white"/>
 </TableRow>

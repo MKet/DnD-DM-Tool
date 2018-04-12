@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="dnd.tools.dnddmtools.InitiativeActivity"
-    android:background="@color/black">
+    android:background="@color/background">
 
     <EditText
         android:id="@+id/creatureName"
@@ -18,8 +18,8 @@
         android:hint="@string/creature_name"
         android:inputType="textPersonName"
         android:singleLine="true"
-        android:textColor="@color/red"
-        android:textColorHint="@color/red"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintEnd_toStartOf="@+id/ChallengeRatingInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,8 +33,8 @@
         android:ems="10"
         android:hint="@string/challengeRatingAbbreviation"
         android:inputType="number"
-        android:textColor="@color/red"
-        android:textColorHint="@color/red"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintEnd_toStartOf="@+id/AmountInput"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,8 +48,8 @@
         android:hint="@string/amount"
         android:inputType="number"
         android:singleLine="true"
-        android:textColor="@color/red"
-        android:textColorHint="@color/red"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,8 +63,8 @@
         android:hint="@string/dexterity"
         android:inputType="number"
         android:singleLine="true"
-        android:textColor="@color/red"
-        android:textColorHint="@color/red"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creatureName" />
 
@@ -80,8 +80,8 @@
         android:hint="@string/initiative"
         android:inputType="number"
         android:singleLine="true"
-        android:textColor="@color/red"
-        android:textColorHint="@color/red"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/AddButton"
         app:layout_constraintEnd_toStartOf="@+id/RollInput"
         app:layout_constraintHorizontal_bias="0.0"
@@ -95,8 +95,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/roll"
-        android:textColor="@color/black"
-        android:background="@color/red"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AmountInput" />
 
@@ -108,8 +108,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/clear"
-        android:background="@color/red"
-        android:textColor="@color/black"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/recycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DexterityInput"
@@ -124,8 +124,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/add"
-        android:background="@color/red"
-        android:textColor="@color/black"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/recycler"
         app:layout_constraintEnd_toStartOf="@+id/ClearButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,8 +142,8 @@
         android:ems="10"
         android:hint="@string/roll"
         android:inputType="number"
-        android:textColor="@color/red"
-        android:textColorHint="@color/red"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/AddButton"
         app:layout_constraintEnd_toStartOf="@+id/RollButton"
         app:layout_constraintTop_toBottomOf="@+id/AmountInput"
@@ -168,8 +168,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/end_turn"
-        android:background="@color/red"
-        android:textColor="@color/black"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recycler" />
 
@@ -180,8 +180,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/end_combat"
-        android:background="@color/red"
-        android:textColor="@color/black"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@+id/EndTurnButton"
         app:layout_constraintTop_toBottomOf="@+id/recycler" />
 
@@ -202,7 +202,7 @@
             style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
+            android:textColor="@color/colorPrimary"
             android:text="@string/creature_name"
             android:layout_marginEnd="20dp"/>
 
@@ -212,7 +212,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/challengeRatingAbbreviation"
-            android:textColor="@color/red"
+            android:textColor="@color/colorPrimary"
             android:layout_marginEnd="20dp"/>
 
 
@@ -222,7 +222,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/initiative"
-            android:textColor="@color/red"
+            android:textColor="@color/colorPrimary"
             android:layout_marginEnd="20dp"/>
 
         <TextView
@@ -231,7 +231,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:textColor="@color/red"
+            android:textColor="@color/colorPrimary"
             android:text="@string/dexterity"/>
     </TableRow>
 

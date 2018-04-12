@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/background"
     >
 
     <Spinner
@@ -13,10 +13,10 @@
         android:layout_height="35dp"
         android:layout_marginEnd="3dp"
         android:layout_marginTop="15dp"
-        android:background="@color/red"
-        android:backgroundTint="@color/red"
-        android:popupBackground="@color/red"
-        android:textColor="@color/black"
+        android:background="@color/colorPrimary"
+        android:backgroundTint="@color/colorAccent"
+        android:popupBackground="@color/background"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,9 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
-        android:background="@color/red"
+        android:background="@color/colorAccent"
         android:text="@string/see_notes"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -40,9 +40,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="@color/red"
+        android:background="@color/colorAccent"
         android:text="@string/new_campaign"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@+id/btnSeeNotes"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -54,7 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@color/black"
+        android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,8 +79,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/combat"
-        android:background="@color/red"
-        android:textColor="@color/black"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@+id/btnNewCampaign"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
