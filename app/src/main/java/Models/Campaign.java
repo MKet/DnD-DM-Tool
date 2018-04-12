@@ -11,17 +11,7 @@ import java.util.List;
  * Created by maxhe on 15-3-2018.
  */
 
-public class Campaign implements Parcelable, Serializable{
-
-    private String id;
-    private String name;
-    private List<CampaignPlayer> players = new ArrayList<>();
-    private String note;
-    private String dungeonMaster;
-
-    public Campaign(){
-
-    }
+public class Campaign implements Parcelable, Serializable {
 
     public static final Creator<Campaign> CREATOR = new Creator<Campaign>() {
         @Override
@@ -34,9 +24,35 @@ public class Campaign implements Parcelable, Serializable{
             return new Campaign[size];
         }
     };
+    private String id;
+    private String name;
+    private List<CampaignPlayer> players = new ArrayList<>();
+    private String note;
+    private String dungeonMaster;
+
+    public Campaign() {
+
+    }
+
+    protected Campaign(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+
+        players = new ArrayList<>();
+        int size = in.readInt();
+        for (int i = 0; i < size; i++) {
+            players.add(CampaignPlayer.CREATOR.createFromParcel(in));
+        }
+        note = in.readString();
+        dungeonMaster = in.readString();
+    }
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDungeonMaster() {
@@ -45,10 +61,6 @@ public class Campaign implements Parcelable, Serializable{
 
     public void setDungeonMaster(String dungeonMaster) {
         this.dungeonMaster = dungeonMaster;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -76,27 +88,13 @@ public class Campaign implements Parcelable, Serializable{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 
     @Override
     public int describeContents() {
         return 0;
-    }
-
-
-    protected Campaign(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-
-        players = new ArrayList<>();
-        int size = in.readInt();
-        for(int i = 0; i < size; i++) {
-            players.add(CampaignPlayer.CREATOR.createFromParcel(in));
-        }
-        note = in.readString();
-        dungeonMaster = in.readString();
     }
 
     @Override

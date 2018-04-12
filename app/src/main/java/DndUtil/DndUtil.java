@@ -1,9 +1,7 @@
 package DndUtil;
 
-import java.security.cert.CRL;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -14,9 +12,6 @@ import java.util.Random;
 public class DndUtil {
     public static final Map<Float, Integer> ExpMap;
     public static final Random random = new Random();
-    public static int ScoreToModifier(int roll) {
-        return (int)Math.floor(roll/2 -5);
-    }
 
     static {
         // The experience per challenge rating is handpicked for an optimal curve in D&D
@@ -25,9 +20,9 @@ public class DndUtil {
         // this cannot be simply calculated using a formula
         Map<Float, Integer> temp = new HashMap<>(34, 1);
         temp.put(0f, 10);
-        temp.put(1/8f, 25);
-        temp.put(1/4f, 50);
-        temp.put(1/2f, 100);
+        temp.put(1 / 8f, 25);
+        temp.put(1 / 4f, 50);
+        temp.put(1 / 2f, 100);
         temp.put(1f, 200);
         temp.put(2f, 450);
         temp.put(3f, 700);
@@ -61,12 +56,16 @@ public class DndUtil {
         ExpMap = Collections.unmodifiableMap(temp);
     }
 
-    public static int RollD20() {
-        return random.nextInt(20)+1;
+    public static int ScoreToModifier(int roll) {
+        return (int) Math.floor(roll / 2 - 5);
     }
 
-    public static int calculateProficiency(int level){
-        return (int)Math.floor((7 + level) / 4);
+    public static int RollD20() {
+        return random.nextInt(20) + 1;
+    }
+
+    public static int calculateProficiency(int level) {
+        return (int) Math.floor((7 + level) / 4);
     }
 
 }

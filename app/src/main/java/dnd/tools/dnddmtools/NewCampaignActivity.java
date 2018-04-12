@@ -36,7 +36,7 @@ public class NewCampaignActivity extends AppCompatActivity {
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         campaign = new Campaign();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_campaign_activity);
@@ -54,7 +54,7 @@ public class NewCampaignActivity extends AppCompatActivity {
         btnAddCampaign.setOnClickListener(v -> addCampaign());
     }
 
-    private void addCampaign(){
+    private void addCampaign() {
         Intent intent = getIntent();
         DungeonMaster dungeonMaster = intent.getParcelableExtra(HomeActivity.DUNGEONMASTER);
 
@@ -65,14 +65,14 @@ public class NewCampaignActivity extends AppCompatActivity {
         reference.child("Campaign").child(key).child("dungeonMaster").setValue(campaign.getDungeonMaster());
         reference.child("Campaign").child(key).child("name").setValue(campaign.getName());
         reference.child("Campaign").child(key).child("players").setValue(campaign.getPlayers());
-        Intent intentBack = new Intent(this,HomeActivity.class);
-        intent.putExtra(DUNGEON_MASTER, (Parcelable)dungeonMaster);
+        Intent intentBack = new Intent(this, HomeActivity.class);
+        intent.putExtra(DUNGEON_MASTER, (Parcelable) dungeonMaster);
         startActivity(intentBack);
         campaign = new Campaign();
         setListView();
     }
 
-    private void addPlayer(){
+    private void addPlayer() {
         CampaignPlayer player = new CampaignPlayer(txtPlayername.getText().toString(), reference.push().getKey());
 
         campaign.getPlayers().add(player);

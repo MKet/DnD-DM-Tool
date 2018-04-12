@@ -1,13 +1,12 @@
 package Models;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by maxhe on 16-3-2018.
  */
 
-public enum Abilities{
+public enum Abilities {
 
     Strength("Strength"),
     Dexterity("Dexterity"),
@@ -18,12 +17,12 @@ public enum Abilities{
 
     private String name;
 
-    Abilities(String name){
+    Abilities(String name) {
         this.name = name;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 

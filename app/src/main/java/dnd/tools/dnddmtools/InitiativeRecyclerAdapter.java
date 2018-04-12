@@ -1,19 +1,16 @@
 package dnd.tools.dnddmtools;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -51,7 +48,7 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     public List<CreatureTurnItem> getList() {
         List<CreatureTurnItem> temp = new ArrayList<>();
 
-        for(int i= 0; i < Dataset.size(); i++) {
+        for (int i = 0; i < Dataset.size(); i++) {
             CreatureTurnItem item = Dataset.get(i);
             temp.add(item);
         }
@@ -66,7 +63,7 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     // Create new views (invoked by the layout manager)
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+                                                      int viewType) {
         // create a new view
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.initiative_item_view, parent, false);
@@ -77,10 +74,10 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         InitiativeViewHolder initiativeViewHolder = (InitiativeViewHolder) holder;
         CreatureTurnItem item = Dataset.get(position);
-        initiativeViewHolder.CR.setText(String.format(Locale.US,"%d", item.getCR()));
-        initiativeViewHolder.Initiative.setText(String.format(Locale.US,"%d", item.getInitiative()));
+        initiativeViewHolder.CR.setText(String.format(Locale.US, "%d", item.getCR()));
+        initiativeViewHolder.Initiative.setText(String.format(Locale.US, "%d", item.getInitiative()));
         initiativeViewHolder.name.setText(item.getName());
-        initiativeViewHolder.Dexterity.setText(String.format(Locale.US,"%d", item.getDexterity()));
+        initiativeViewHolder.Dexterity.setText(String.format(Locale.US, "%d", item.getDexterity()));
 
         if (item.isFriendly())
             initiativeViewHolder.row.setBackgroundColor(context.getResources().getColor(R.color.friendlyInitative));

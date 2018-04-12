@@ -11,18 +11,6 @@ import java.util.Map;
  * Created by maxhe on 5-4-2018.
  */
 public class PlayerAbility implements Parcelable, Serializable {
-    private Abilities abilities;
-    private Integer value;
-    private HashMap<String, Skill> skills;
-
-    public HashMap<String, Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(HashMap<String, Skill> skills) {
-        this.skills = skills;
-    }
-
     public static final Creator<PlayerAbility> CREATOR = new Creator<PlayerAbility>() {
         @Override
         public PlayerAbility createFromParcel(Parcel in) {
@@ -34,17 +22,11 @@ public class PlayerAbility implements Parcelable, Serializable {
             return new PlayerAbility[size];
         }
     };
+    private Abilities abilities;
+    private Integer value;
+    private HashMap<String, Skill> skills;
 
-    public void setAbilities(Abilities abilities) {
-        this.abilities = abilities;
-        skills = abilities.generateSkills();
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
-    public PlayerAbility(){
+    public PlayerAbility() {
     }
 
     public PlayerAbility(Abilities abilities, Integer value) {
@@ -53,12 +35,47 @@ public class PlayerAbility implements Parcelable, Serializable {
         this.value = value;
     }
 
+    protected PlayerAbility(Parcel in) {
+        abilities = Abilities.values()[in.readInt()];
+
+        if (in.readByte() == 0) {
+            value = null;
+        } else {
+            value = in.readInt();
+        }
+
+        skills = new HashMap<>();
+        int size = in.readInt();
+        for (int i = 0; i < size; i++) {
+            String key = in.readString();
+            Skill value = Skill.CREATOR.createFromParcel(in);
+            skills.put(key, value);
+        }
+    }
+
+    public HashMap<String, Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(HashMap<String, Skill> skills) {
+        this.skills = skills;
+    }
+
     public Abilities getAbilities() {
         return abilities;
     }
 
+    public void setAbilities(Abilities abilities) {
+        this.abilities = abilities;
+        skills = abilities.generateSkills();
+    }
+
     public Integer getValue() {
         return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
     }
 
     @Override
@@ -77,27 +94,9 @@ public class PlayerAbility implements Parcelable, Serializable {
         }
 
         dest.writeInt(skills.size());
-        for(Map.Entry<String, Skill> entry : skills.entrySet()){
+        for (Map.Entry<String, Skill> entry : skills.entrySet()) {
             dest.writeString(entry.getKey());
             entry.getValue().writeToParcel(dest, flags);
-        }
-    }
-
-    protected PlayerAbility(Parcel in) {
-        abilities = Abilities.values()[in.readInt()];
-
-        if (in.readByte() == 0) {
-            value = null;
-        } else {
-            value = in.readInt();
-        }
-
-        skills = new HashMap<>();
-        int size = in.readInt();
-        for(int i = 0; i < size; i++){
-            String key = in.readString();
-            Skill value = Skill.CREATOR.createFromParcel(in);
-            skills.put(key,value);
         }
     }
 }

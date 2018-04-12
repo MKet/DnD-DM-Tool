@@ -2,8 +2,6 @@ package Models;
 
 import android.support.annotation.NonNull;
 
-import java.util.List;
-
 import DndUtil.DndUtil;
 
 /**
@@ -84,10 +82,10 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
         CreatureTurnItem that = (CreatureTurnItem) o;
 
         return CR == that.CR &&
-               Dexterity == that.Dexterity &&
-               Initiative == that.Initiative &&
-               turns == that.turns &&
-               (name != null ? name.equals(that.name) : that.name == null);
+                Dexterity == that.Dexterity &&
+                Initiative == that.Initiative &&
+                turns == that.turns &&
+                (name != null ? name.equals(that.name) : that.name == null);
     }
 
     @Override
