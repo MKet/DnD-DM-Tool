@@ -1,5 +1,6 @@
 package dnd.tools.dnddmtools;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import Models.Campaign;
 
 public class NoteActivity extends AppCompatActivity {
 
+    public static String NOTE_RESULT_KEY = "NoteResult";
     private Campaign campaign;
     private EditText editText;
 
@@ -52,5 +54,9 @@ public class NoteActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Campaign").child(campaign.getId());
         reference.child("note").removeValue();
         reference.child("note").setValue(editText.getText().toString());
+
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(NOTE_RESULT_KEY, editText.getText().toString());
+        setResult(Activity.RESULT_OK, resultIntent);
     }
 }

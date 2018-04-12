@@ -1,5 +1,6 @@
 package dnd.tools.dnddmtools;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -49,7 +50,7 @@ public class HomeActivity extends AppCompatActivity{
     public static final String CAMPAIGNPLAYER = "";
     public static final String SKILLSLIST = "LIST";
     private Campaign campaign;
-
+    private DatabaseReference reference;
 
     private Button combatButton;
     private Button btnNewCampaign;
@@ -77,6 +78,7 @@ public class HomeActivity extends AppCompatActivity{
         btnNotes.setOnClickListener(v -> {
             intentNotes.putExtra(NOTES, (Parcelable)campaign);
             startActivity(intentNotes);
+            startActivityForResult(intentNotes, NOTE_RESULT);
         });
 
         lstViewPlayers = findViewById(R.id.lstPlayers);
@@ -115,7 +117,7 @@ public class HomeActivity extends AppCompatActivity{
         spinnerCampaign = findViewById(R.id.spinner);
         spinnerCampaign.setAdapter(campaignArrayAdapter);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Campaign");
+        reference = FirebaseDatabase.getInstance().getReference("Campaign");
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -154,5 +156,19 @@ public class HomeActivity extends AppCompatActivity{
         intent.putExtra(POSITION, position);
 
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (NOTE_RESULT) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    String note = data.getStringExtra(NoteActivity.NOTE_RESULT_KEY);
+                    campaign.setNote(note);
+                }
+                break;
+            }
+        }
     }
 }
