@@ -93,7 +93,10 @@ public class PlayerActivity extends AppCompatActivity {
 
         for (int i= 0; i<5; i++) {
             int index = i; // variables used in lambda must be effectively final
-            checkBox[index].setOnCheckedChangeListener((cb, b) -> setProficiency(skill[index], b));
+            checkBox[index].setOnCheckedChangeListener((cb, b) -> {
+                setProficiency(skill[index], b);
+                skillView[index].setText(String.format(Locale.US, "%s", player.calculateSkillValue(skill[index])));
+            });
         }
 
         spinnerAbility.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
