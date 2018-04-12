@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class DndUtil {
     public static final Map<Float, Integer> ExpMap;
-    private static Random random = new Random();
+    public static final Random random = new Random();
     public static int ScoreToModifier(int roll) {
         return (int)Math.floor(roll/2 -5);
     }

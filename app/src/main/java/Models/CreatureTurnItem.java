@@ -18,6 +18,7 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
     private int Initiative;
     private int turns;
     private boolean isFriendly = false;
+    private int random;
 
     public CreatureTurnItem(CampaignPlayer player) {
         name = player.getName();
@@ -26,6 +27,7 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
         Initiative = DndUtil.ScoreToModifier(Dexterity);
         turns = 0;
         isFriendly = true;
+        random = DndUtil.random.nextInt();
     }
 
     public CreatureTurnItem(String name, int CR, int dexterity, int initiative, int turns) {
@@ -34,6 +36,7 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
         Dexterity = dexterity;
         Initiative = initiative;
         this.turns = turns;
+        random = DndUtil.random.nextInt();
     }
 
     public CreatureTurnItem(String name, int CR, int dexterity, int initiative) {
@@ -42,6 +45,7 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
         Dexterity = dexterity;
         Initiative = initiative;
         this.turns = 0;
+        random = DndUtil.random.nextInt();
     }
 
     public String getName() {
@@ -117,6 +121,8 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
             comparison = creatureTurnItem.Initiative - Initiative;
         if (comparison == 0)
             comparison = creatureTurnItem.Dexterity - Dexterity;
+        if (comparison == 0)
+            comparison = creatureTurnItem.random - random;
 
         return comparison;
 
