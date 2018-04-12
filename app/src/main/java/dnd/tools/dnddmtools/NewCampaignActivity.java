@@ -81,7 +81,7 @@ public class NewCampaignActivity extends AppCompatActivity {
     }
 
     private void setListView(){
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, campaign.getPlayers());
+        adapter = new ArrayAdapter<>(this,R.layout.list_item, campaign.getPlayers());
         lstPlayers.setAdapter(adapter);
     }
 }

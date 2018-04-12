@@ -2,6 +2,7 @@ package dnd.tools.dnddmtools;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,14 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -27,7 +26,6 @@ import java.util.List;
 import Models.Campaign;
 import Models.CampaignPlayer;
 import Models.DungeonMaster;
-import Models.Skill;
 
 /**
  * Created by maxhe on 15-3-2018.
@@ -82,6 +80,12 @@ public class HomeActivity extends AppCompatActivity{
         });
 
         lstViewPlayers = findViewById(R.id.lstPlayers);
+        lstViewPlayers.setCacheColorHint(Color.rgb(226,0,0));
+        TextView lstPlayersTitle = new TextView(getBaseContext());
+        lstPlayersTitle.setTextColor(Color.rgb(226,0,0));
+        lstPlayersTitle.setText("Players:");
+        lstPlayersTitle.setTextSize(20);
+        lstViewPlayers.addHeaderView(lstPlayersTitle);
         spinnerCampaign.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -139,7 +143,7 @@ public class HomeActivity extends AppCompatActivity{
     private void setLstViewPlayers(Campaign campaign){
         this.campaign = campaign;
         campaignPlayers = new ArrayList<>();
-        campaignPlayerArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,campaignPlayers);
+        campaignPlayerArrayAdapter = new ArrayAdapter<>(this,R.layout.list_item,campaignPlayers);
         lstViewPlayers.setAdapter(campaignPlayerArrayAdapter);
 
         campaignPlayers.addAll(campaign.getPlayers());

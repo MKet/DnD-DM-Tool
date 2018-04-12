@@ -3,14 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    >
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="381dp"
         android:layout_height="35dp"
         android:layout_marginEnd="3dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/red"
+        android:backgroundTint="@color/red"
+        android:popupBackground="@color/red"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,12 +26,11 @@
         android:id="@+id/btnSeeNotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="256dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
+        android:background="@color/red"
         android:text="@string/see_notes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -33,11 +38,11 @@
         android:id="@+id/btnNewCampaign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:background="@color/red"
         android:text="@string/new_campaign"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/btnSeeNotes"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -49,6 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +79,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/combat"
+        android:background="@color/red"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/btnNewCampaign"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
