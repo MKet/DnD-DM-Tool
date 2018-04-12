@@ -1,9 +1,11 @@
 package dnd.tools.dnddmtools;
 
+import android.arch.lifecycle.LifecycleObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,10 +15,11 @@ import java.util.List;
 import java.util.Locale;
 
 import Models.CampaignPlayer;
+import Models.CreatureTurnItem;
 
+import static DndUtil.DndUtil.ExpMap;
 import static DndUtil.DndUtil.RollD20;
 import static DndUtil.DndUtil.ScoreToModifier;
-import static DndUtil.DndUtil.calculateExperience;
 
 public class InitiativeActivity extends AppCompatActivity {
 
@@ -52,10 +55,14 @@ public class InitiativeActivity extends AppCompatActivity {
             Button endCombat = findViewById(R.id.EndCombat);
             RecyclerView recyclerView = findViewById(R.id.recycler);
 
-            InitiativeRecyclerAdapter adapter = new InitiativeRecyclerAdapter();
+            InitiativeRecyclerAdapter adapter = new InitiativeRecyclerAdapter(this);
             LinearLayoutManager LinearLayoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(LinearLayoutManager);
             recyclerView.setAdapter(adapter);
+
+            for (CampaignPlayer player : players) {
+                adapter.add(new CreatureTurnItem(player));
+            }
 
             add.setOnClickListener((v) -> {
                 if (creatureNameInput.getText().toString().trim().length() == 0) {
@@ -119,14 +126,33 @@ public class InitiativeActivity extends AppCompatActivity {
 
             endTurn.setOnClickListener((v) -> adapter.nextTurn());
 
-            endCombat.setOnClickListener((v) -> {
-                int experience = calculateExperience(adapter.getCRList(), players.size());
+            endCombat.setOnClickListener((View v) -> {
+                int experience = calculateExperience(adapter.getList(), players.size());
 
-                ExperienceFragment newFragment = ExperienceFragment.newInstance(experience);
-                newFragment.show(getSupportFragmentManager(), "dialog");
-                adapter.clear();
+                Toast.makeText(this, getString(R.string.experience_message, experience), Toast.LENGTH_LONG).show();
             });
         }
+    }
+
+    private int calculateExperience(Iterable<CreatureTurnItem> CRList, int playerAmount) {
+        int totalExperience = 0;
+        for (CreatureTurnItem item : CRList) {
+            if (item.isFriendly())
+                continue;
+            totalExperience += calculateExperience(item.getCR());
+        }
+        return totalExperience / playerAmount;
+    }
+
+    private  int calculateExperience(Iterable<CreatureTurnItem> CRList) {
+        return calculateExperience(CRList, 1);
+    }
+
+    private int calculateExperience(float CR) {
+        if (!ExpMap.containsKey(CR))
+            throw new IllegalArgumentException("Challenge rating does not exist");
+
+        return ExpMap.get(CR);
     }
 }
 

@@ -1,6 +1,10 @@
-package dnd.tools.dnddmtools;
+package Models;
 
 import android.support.annotation.NonNull;
+
+import java.util.List;
+
+import DndUtil.DndUtil;
 
 /**
  * Created by Marco on 3/16/2018.
@@ -13,6 +17,27 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
     private int Dexterity;
     private int Initiative;
     private int turns;
+    private boolean isFriendly = false;
+
+    public CreatureTurnItem(CampaignPlayer player) {
+        name = player.getName();
+        CR = 0;
+        Dexterity = 10;
+
+        List<Skill> skillList = player.getSkillList();
+
+        if (skillList != null)
+            for (Skill s : skillList) {
+                String skillName = s.getName();
+                if (skillName.equals("Dexterity")) {
+                    Dexterity = s.getValue();
+                    break;
+                }
+            }
+        Initiative = DndUtil.ScoreToModifier(Dexterity);
+        turns = 0;
+        isFriendly = true;
+    }
 
     public CreatureTurnItem(String name, int CR, int dexterity, int initiative, int turns) {
         this.name = name;
@@ -52,6 +77,10 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
 
     public void endTurn() {
         turns++;
+    }
+
+    public boolean isFriendly() {
+        return isFriendly;
     }
 
     @Override

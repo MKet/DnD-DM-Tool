@@ -1,27 +1,34 @@
 package dnd.tools.dnddmtools;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TableRow;
 import android.widget.TextView;
 
-import java.security.cert.CRL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import Models.CreatureTurnItem;
+
 /**
  * Created by Marco on 3/22/2018.
  */
 public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private SortedList<CreatureTurnItem> Dataset;
+    private Context context;
 
-    public InitiativeRecyclerAdapter() {
+    public InitiativeRecyclerAdapter(Context context) {
+        this.context = context;
 
         Dataset = new SortedList<>(CreatureTurnItem.class, new SortedListAdapterCallback<CreatureTurnItem>(this) {
             @Override
@@ -41,14 +48,15 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         });
     }
 
-    public List<Float> getCRList() {
-        List<Float> CRList = new ArrayList<>(Dataset.size());
+    public List<CreatureTurnItem> getList() {
+        List<CreatureTurnItem> temp = new ArrayList<>();
 
-        for (int i = 0; i < Dataset.size(); i++) {
-            CRList.add((float)Dataset.get(i).getCR());
+        for(int i= 0; i < Dataset.size(); i++) {
+            CreatureTurnItem item = Dataset.get(i);
+            temp.add(item);
         }
 
-        return CRList;
+        return Collections.unmodifiableList(temp);
     }
 
     public void add(CreatureTurnItem o) {
@@ -73,6 +81,9 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         initiativeViewHolder.Initiative.setText(String.format(Locale.US,"%d", item.getInitiative()));
         initiativeViewHolder.name.setText(item.getName());
         initiativeViewHolder.Dexterity.setText(String.format(Locale.US,"%d", item.getDexterity()));
+
+        if (item.isFriendly())
+            initiativeViewHolder.row.setBackgroundColor(context.getResources().getColor(R.color.friendlyInitative));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -96,6 +107,7 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         private TextView CR;
         private TextView Initiative;
         private TextView Dexterity;
+        private TableRow row;
 
         InitiativeViewHolder(View itemView) {
             super(itemView);
@@ -103,6 +115,8 @@ public class InitiativeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             CR = itemView.findViewById(R.id.CR);
             Initiative = itemView.findViewById(R.id.Initiative);
             Dexterity = itemView.findViewById(R.id.Dexterity);
+            row = itemView.findViewById(R.id.row);
+
         }
     }
 }

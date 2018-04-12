@@ -12,7 +12,7 @@ import java.util.Random;
  */
 
 public class DndUtil {
-    private static final Map<Float, Integer> ExpMap;
+    public static final Map<Float, Integer> ExpMap;
     private static Random random = new Random();
     public static int ScoreToModifier(int roll) {
         return (int)Math.floor(roll/2 -5);
@@ -69,23 +69,4 @@ public class DndUtil {
         return (int)Math.floor((7 + level) / 4);
     }
 
-    public static int calculateExperience(float CR) {
-        if (!ExpMap.containsKey(CR))
-            throw new IllegalArgumentException("Challenge rating does not exist");
-
-        return ExpMap.get(CR);
-    }
-
-    public static int calculateExperience(Iterable<Float> CRList, int playerAmount) {
-        int totalExperience = 0;
-        for (float cr : CRList) {
-            totalExperience += calculateExperience(cr);
-        }
-
-        return totalExperience / playerAmount;
-    }
-
-    public static int calculateExperience(Iterable<Float> CRList) {
-        return calculateExperience(CRList, 1);
-    }
 }
