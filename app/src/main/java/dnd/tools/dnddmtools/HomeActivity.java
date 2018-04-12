@@ -136,7 +136,8 @@ public class HomeActivity extends AppCompatActivity{
                     Campaign campaign = snapshot.getValue(Campaign.class);
                     String id = snapshot.getKey();
                     campaign.setId(id);
-                    campaigns.add(campaign);
+                    if (campaign.getDungeonMaster().equals(dungeonMaster.getId()))
+                        campaigns.add(campaign);
                 }
                 campaignArrayAdapter.notifyDataSetChanged();
                 CampaignButtonsEnabled(campaigns != null && !campaigns.isEmpty());
