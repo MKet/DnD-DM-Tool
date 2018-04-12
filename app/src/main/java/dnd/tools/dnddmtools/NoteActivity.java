@@ -21,8 +21,8 @@ import Models.Campaign;
 
 public class NoteActivity extends AppCompatActivity {
 
-    Campaign campaign;
-    EditText editText;
+    private Campaign campaign;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstance){
@@ -30,12 +30,12 @@ public class NoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notes);
 
         Intent intent = getIntent();
-        campaign = (Campaign) intent.getParcelableExtra(HomeActivity.NOTES);
+        campaign = intent.getParcelableExtra(HomeActivity.NOTES);
 
-        TextView txtCampaign = (TextView)findViewById(R.id.txtCampaign);
+        TextView txtCampaign = findViewById(R.id.txtCampaign);
         txtCampaign.setText(campaign.getName());
 
-        editText = (EditText)findViewById(R.id.txtNotes);
+        editText = findViewById(R.id.txtNotes);
 
         try {
             editText.setText(campaign.getNote());
@@ -43,15 +43,8 @@ public class NoteActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        Button btnSave = (Button)findViewById(R.id.btnSaveNote);
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveNote();
-            }
-        });
+        Button btnSave = findViewById(R.id.btnSaveNote);
+        btnSave.setOnClickListener(v -> saveNote());
 
     }
 
