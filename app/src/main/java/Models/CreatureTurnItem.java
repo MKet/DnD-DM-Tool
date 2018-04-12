@@ -22,18 +22,7 @@ public class CreatureTurnItem implements Comparable<CreatureTurnItem> {
     public CreatureTurnItem(CampaignPlayer player) {
         name = player.getName();
         CR = 0;
-        Dexterity = 10;
-
-        List<Skill> skillList = player.getSkillList();
-
-        if (skillList != null)
-            for (Skill s : skillList) {
-                String skillName = s.getName();
-                if (skillName.equals("Dexterity")) {
-                    Dexterity = s.getValue();
-                    break;
-                }
-            }
+        Dexterity = player.getAbilities().get(Abilities.Dexterity.name()).getValue();
         Initiative = DndUtil.ScoreToModifier(Dexterity);
         turns = 0;
         isFriendly = true;
