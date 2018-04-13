@@ -12,10 +12,10 @@
         android:layout_height="35dp"
         android:layout_marginEnd="3dp"
         android:layout_marginTop="15dp"
-        android:background="@color/colorPrimary"
-        android:backgroundTint="@color/colorAccent"
-        android:popupBackground="@color/colorAccent"
-        android:textColor="@color/colorPrimary"
+        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:popupBackground="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,9 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/see_notes"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -39,9 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/new_campaign"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toEndOf="@+id/btnSeeNotes"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -78,8 +78,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/combat"
-        android:background="@color/colorAccent"
-        android:textColor="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toEndOf="@+id/btnNewCampaign"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 

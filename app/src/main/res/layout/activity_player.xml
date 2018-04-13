@@ -15,9 +15,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"
-        android:textColor="@color/colorPrimary"
-        android:background="@color/colorAccent"
-        android:popupBackground="@color/colorAccent"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
+        android:popupBackground="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtAbility" />
@@ -30,7 +30,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
         android:text="@string/playername"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnerAbility"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="17dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:text="@string/abilities"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +55,8 @@
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="16dp"
         android:text="@string/save"
-        android:textColor="@color/colorPrimary"
-        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorAccent"
+        android:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -66,7 +66,7 @@
         android:layout_height="24dp"
         android:layout_marginEnd="36dp"
         android:layout_marginTop="18dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:ems="10"
         app:layout_constraintEnd_toStartOf="@+id/checkBox1"
@@ -78,7 +78,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AbilityScore" />
@@ -90,7 +90,7 @@
         android:layout_marginEnd="36dp"
         android:layout_marginTop="16dp"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:ems="10"
         app:layout_constraintEnd_toStartOf="@+id/checkBox2"
         app:layout_constraintTop_toBottomOf="@+id/txtSkill1" />
@@ -102,9 +102,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:text="@string/proficiency"
-        android:buttonTint="@color/colorPrimaryDark"
+        android:buttonTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
@@ -115,7 +115,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -126,7 +126,7 @@
         android:layout_marginEnd="36dp"
         android:layout_marginTop="16dp"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:ems="10"
         app:layout_constraintEnd_toStartOf="@+id/checkBox2"
         app:layout_constraintTop_toBottomOf="@+id/txtSkill2" />
@@ -137,10 +137,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:text="@string/proficiency"
-        android:buttonTint="@color/colorPrimaryDark"
+        android:buttonTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
 
@@ -151,7 +151,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -163,7 +163,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toStartOf="@+id/checkBox2"
         app:layout_constraintTop_toBottomOf="@+id/txtSkill3" />
 
@@ -174,9 +174,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/proficiency"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        android:buttonTint="@color/colorPrimaryDark"
+        android:buttonTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
@@ -187,7 +187,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -198,8 +198,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/proficiency"
-        android:textColor="@color/colorPrimary"
-        android:buttonTint="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
+        android:buttonTint="@color/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
@@ -209,7 +209,7 @@
         android:layout_width="100dp"
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:layout_marginTop="16dp"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -223,8 +223,8 @@
         android:layout_marginTop="18dp"
         android:text="@string/proficiency"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
-        android:buttonTint="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
+        android:buttonTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AbilityScore" />
 
@@ -236,7 +236,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toStartOf="@+id/checkBox5"
         app:layout_constraintTop_toBottomOf="@+id/txtSkill4" />
 
@@ -249,7 +249,7 @@
         android:labelFor="@+id/AbilityScore"
         android:textSize="18sp"
         android:text="@string/modifier"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerAbility" />
 
@@ -261,7 +261,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="number"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/Score"
