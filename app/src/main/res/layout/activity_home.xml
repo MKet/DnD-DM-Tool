@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    >
+    android:background="@color/background">
 
     <Spinner
         android:id="@+id/spinner"
@@ -15,7 +14,7 @@
         android:layout_marginTop="15dp"
         android:background="@color/colorPrimary"
         android:backgroundTint="@color/colorAccent"
-        android:popupBackground="@color/background"
+        android:popupBackground="@color/colorAccent"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
